@@ -89,34 +89,6 @@
 
 ### 準備(React)
 
-#### firebase モジュールのインストール
-
-確認
-
-```
-$ npm info firebase
-```
-
-インストール
-
-```
-$ yarn add firebase
-```
-
-#### `.env.local`の編集
-
-`firebase.js`から`process.env`で取得するため以下の内容に修正する(シングルクォートの中は取得した値を記述する)
-
-```
-REACT_APP_FIREBASE_API_KEY=''
-REACT_APP_FIREBASE_AUTH_DOMAIN=''
-REACT_APP_FIREBASE_DATABASE_URL=''
-REACT_APP_FIREBASE_PROJECT_ID=''
-REACT_APP_FIREBASE_STORAGE_BUCKET=''
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=''
-REACT_APP_FIREBASE_APP_ID=''
-```
-
 #### React ベースアプリの作成
 
 `app`ディレクトリを作成し遷移後`create-react-app`で React ベースアプリを作成する
@@ -125,14 +97,6 @@ REACT_APP_FIREBASE_APP_ID=''
 $ mkdir app
 $ cd app
 $ npx create-react-app .
-```
-
-#### `.evn.local`の移動
-
-事前に作成した`.evn.local`を`app`直下に配置する
-
-```
-$ mv ../.env.local .
 ```
 
 #### React アプリの起動
@@ -150,6 +114,42 @@ $ yarn start
 #### index.js の修正
 
 import している`App`を`components/App`にパスを修正する
+
+#### firebase モジュールのインストール
+
+確認
+
+```
+$ npm info firebase
+```
+
+インストール
+
+```
+$ yarn add firebase
+```
+
+#### `.evn.local`の移動
+
+事前に作成した`.evn.local`を`app`直下に配置する
+
+```
+$ mv ../.env.local .
+```
+
+#### `.env.local`の編集
+
+`firebase.js`から`process.env`で取得するため以下の内容に修正する(シングルクォートの中は取得した値を記述する)
+
+```
+REACT_APP_FIREBASE_API_KEY=''
+REACT_APP_FIREBASE_AUTH_DOMAIN=''
+REACT_APP_FIREBASE_DATABASE_URL=''
+REACT_APP_FIREBASE_PROJECT_ID=''
+REACT_APP_FIREBASE_STORAGE_BUCKET=''
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=''
+REACT_APP_FIREBASE_APP_ID=''
+```
 
 ### 開発
 
