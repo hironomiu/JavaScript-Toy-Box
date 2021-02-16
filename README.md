@@ -133,12 +133,18 @@ $ npm info firebase
 $ yarn add firebase
 ```
 
-#### `.evn.local`の移動
-
-事前に作成した`.evn.local`を`app`直下に配置する
+`yarn start`は Ctrl+C で停止し改めてスタートする
 
 ```
-$ mv ../.env.local .
+$ yarn start
+```
+
+#### `.evn.local`の移動
+
+事前に作成した[`.evn.local`](./sample/src/.env.local)を`app`直下に配置する(sample は設定値は空のため適時埋めること)
+
+```
+$ vi ./src/.env.local .
 ```
 
 #### `.env.local`の編集
@@ -161,4 +167,96 @@ REACT_APP_FIREBASE_APP_ID=''
 
 [Firebase:read-and-write](https://firebase.google.com/docs/database/web/read-and-write)
 
-`src`直下に`firebase.js`として作成
+`src`直下に[`firebase.js`](./sample/src/firebase.js)として作成
+
+#### メッセージデータの投稿
+
+`App.js`を以下に修正(空文字対応、エンター受付(全角、半角)、フォーカス固定などは行っていない)
+
+```
+import React, { useState } from "react"
+import { pushMessage } from "../firebase"
+
+const App = () => {
+  const [name, setName] = useState("default")
+  const [text, setText] = useState("text")
+  return (
+    <>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName((name) => (name = e.target.value))}
+      />
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText((text) => (text = e.target.value))}
+      />
+      <button onClick={() => pushMessage({ name: name, text: text })}>
+        {" "}
+        push{" "}
+      </button>
+    </>
+  )
+}
+
+export default App
+
+```
+
+#### メッセージデータの取得(からの表示)
+
+`App.js`を以下に修正
+
+```
+import React, { useState, useEffect } from "react"
+import { messagesRef, pushMessage } from "../firebase"
+
+const App = () => {
+  const [name, setName] = useState("default")
+  const [text, setText] = useState("text")
+  const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    messagesRef
+      .orderByKey()
+      .limitToLast(10)
+      .on("value", (snapshot) => {
+        const messages = snapshot.val()
+        if (messages === null) return
+        const entries = Object.entries(messages)
+        const newMessages = entries.map((data) => {
+          const [key, message] = data
+          return { key, ...message }
+        })
+        setMessages(newMessages)
+      })
+  }, [])
+
+  return (
+    <>
+      {messages.map((message) => (
+        <div key={message.key}>
+          {message.name}:{message.text}
+        </div>
+      ))}
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName((name) => (name = e.target.value))}
+      />
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText((text) => (text = e.target.value))}
+      />
+      <button onClick={() => pushMessage({ name: name, text: text })}>
+        {" "}
+        push{" "}
+      </button>
+    </>
+  )
+}
+
+export default App
+```
