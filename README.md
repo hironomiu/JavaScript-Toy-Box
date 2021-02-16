@@ -262,3 +262,9 @@ const App = () => {
 
 export default App
 ```
+
+### 確認
+
+Chrome DevTools を開き API キーで検索してみましょう
+
+![dev-tools-01](./images/dev-tools-01.png)
