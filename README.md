@@ -109,11 +109,15 @@ $ yarn start
 
 #### src 配下の変更
 
-`src/components`ディレクトを作成し`App.js`を移動する
+`src/components`ディレクトを作成する
+
+#### App.js の修正
+
+[`App.js`](./sample/src/components/App.js)を`src/components`に移動し変更する
 
 #### index.js の修正
 
-import している`App`を`components/App`にパスを修正する
+[`index.js`](./sample/src/index.js)を import している`App`を`components/App`にパスを修正しその他変更する
 
 #### firebase モジュールのインストール
 
