@@ -208,6 +208,8 @@ export default App
 
 `App.js`を以下に修正
 
+[公式:listen_for_value_events](https://firebase.google.com/docs/database/web/read-and-write#listen_for_value_events)
+
 ```
 import React, { useState, useEffect } from "react"
 import { messagesRef, pushMessage } from "../firebase"
