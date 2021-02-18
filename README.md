@@ -268,3 +268,205 @@ export default App
 Chrome DevTools を開き API キーで検索してみましょう
 
 ![dev-tools-01](./images/dev-tools-01.png)
+
+## デプロイ
+
+ビルド
+
+```
+$ yarn build
+✨  Done in 10.65s.
+```
+
+`build`ディクレトリが作成されていることを確認後、ブラウザで`http://127.0.0.1:8080`を開き動作確認を行う。(停止は CTRL+C)
+
+```
+$ ll build
+total 80
+drwxr-xr-x  10 h-miura  staff   320  2 18 16:13 .
+drwxr-xr-x  15 h-miura  staff   480  2 18 16:21 ..
+-rw-r--r--   1 h-miura  staff   683  2 18 16:13 asset-manifest.json
+-rw-r--r--   1 h-miura  staff  3870  2 18 16:13 favicon.ico
+-rw-r--r--   1 h-miura  staff  2143  2 18 16:13 index.html
+-rw-r--r--   1 h-miura  staff  5347  2 18 16:13 logo192.png
+-rw-r--r--   1 h-miura  staff  9664  2 18 16:13 logo512.png
+-rw-r--r--   1 h-miura  staff   492  2 18 16:13 manifest.json
+-rw-r--r--   1 h-miura  staff    67  2 18 16:13 robots.txt
+drwxr-xr-x   3 h-miura  staff    96  2 18 16:13 static
+$ cd build
+$ npx http-server
+npx: 23個のパッケージを2.34秒でインストールしました。
+Starting up http-server, serving ./
+Available on:
+  http://127.0.0.1:8080
+  http://192.168.1.12:8080
+  http://192.168.1.14:8080
+Hit CTRL-C to stop the server
+```
+
+「Hosting」を押下
+
+![deploy-01](./images/deploy-01.png)
+
+「始める」を押下
+
+![deploy-02](./images/deploy-02.png)
+
+ローカルインストール
+
+```
+$ yarn add --dev firebase-tools
+```
+
+確認
+
+```
+$ npx firebase -V
+9.4.0
+```
+
+「次へ」を押下
+
+![deploy-03](./images/deploy-03.png)
+
+ローカルインストールのため`npx`をつけ実行する
+
+![deploy-04](./images/deploy-04.png)
+
+```
+$ npx firebase login
+Already logged in as xxxxx@gmail.com
+```
+
+矢印などで上下させ「Hosting」を選択しスペースを押下しエンターを押下
+
+```
+$ npx firebase init
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+You're about to initialize a Firebase project in this directory:
+  /Users/Desktop/test
+? Which Firebase CLI features do you want to set up for this folder? Press Space to select featur
+es, then Enter to confirm your choices. (Press <space> to select, <a> to toggle all, <i> to inver
+t selection)
+ ◯ Database: Configure Firebase Realtime Database and deploy rules
+ ◯ Firestore: Deploy rules and create indexes for Firestore
+ ◯ Functions: Configure and deploy Cloud Functions
+❯◯ Hosting: Configure and deploy Firebase Hosting sites
+ ◯ Storage: Deploy Cloud Storage security rules
+ ◯ Emulators: Set up local emulators for Firebase features
+ ◯ Remote Config: Get, deploy, and rollback configurations for Remote Config
+```
+
+「Use an existing project」を選択しエンターを押下
+
+```
+=== Project Setup
+First, let's associate this project directory with a Firebase project.
+You can create multiple project aliases by running firebase use --add,
+but for now we'll just set up a default project.
+? Please select an option: (Use arrow keys)
+❯ Use an existing project
+  Create a new project
+  Add Firebase to an existing Google Cloud Platform project
+  Don't set up a default project
+```
+
+今回作成したプロジェクトを選択しエンターを押下
+
+```
+=== Project Setup
+First, let's associate this project directory with a Firebase project.
+You can create multiple project aliases by running firebase use --add,
+but for now we'll just set up a default project.
+? Please select an option: Use an existing project
+? Select a default Firebase project for this directory: (Use arrow keys)
+❯ fir-react-sample (firebase-react-sample)
+  xxxxxx (xxxxxx)
+  yyyyyy (yyyyyy)
+```
+
+`build`を入力しエンターを押下、「y」「n」「n」を押下
+
+```
+=== Hosting Setup
+Your public directory is the folder (relative to your project directory) that
+will contain Hosting assets to be uploaded with firebase deploy. If you
+have a build process for your assets, use your build's output directory.
+? What do you want to use as your public directory? build
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? Set up automatic builds and deploys with GitHub? No
+? File build/index.html already exists. Overwrite? No
+i  Skipping write of build/index.html
+i  Writing configuration info to firebase.json...
+i  Writing project information to .firebaserc...
+✔  Firebase initialization complete!
+```
+
+`firebase.json`を確認
+
+```
+$ cat firebase.json
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+
+`.firebaserc`を確認
+
+```
+$ cat .firebaserc
+{
+  "projects": {
+    "default": "fir-react-sample"
+  }
+}
+```
+
+「次へ」を押下
+
+![deploy-04](./images/deploy-04.png)
+
+![deploy-05](./images/deploy-05.png)
+
+デプロイが成功したら「Hosting URL」をブラウザで開く
+
+```
+$ npx firebase deploy
+=== Deploying to ‘fir-react-sample’...
+
+i  deploying hosting
+i  hosting[fir-react-sample]: beginning deploy...
+i  hosting[fir-react-sample]: found 14 files in build
+✔  hosting[fir-react-sample]: file upload complete
+i  hosting[fir-react-sample]: finalizing version...
+✔  hosting[fir-react-sample]: version finalized
+i  hosting[fir-react-sample]: releasing new version...
+✔  hosting[fir-react-sample]: release complete
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/fir-react-sample-xxxx/overview
+Hosting URL: https://fir-react-sample-xxxx.web.app
+```
+
+「コンソールにすすむ」を押下
+
+![deploy-05](./images/deploy-05.png)
+
+Git で管理している場合は`.gitignore`に`.firebase`,`.firebaserc`,`firebase.json`を追記する
