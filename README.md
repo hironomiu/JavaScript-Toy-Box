@@ -3,6 +3,7 @@
 ## すること
 
 1. React アプリから Firebase Realtime Database を利用
+2. Firebase Hosting にデプロイ
 
 ## 前提
 
