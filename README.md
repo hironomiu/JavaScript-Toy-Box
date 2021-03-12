@@ -162,6 +162,12 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=''
 REACT_APP_FIREBASE_APP_ID=''
 ```
 
+`.env.local`を反映させるため、Ctrl+C で停止し改めて`yarn start`でスタートする
+
+```
+$ yarn start
+```
+
 ### 開発
 
 #### firbase.js
