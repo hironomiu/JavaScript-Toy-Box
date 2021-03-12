@@ -145,7 +145,7 @@ $ yarn start
 事前に作成した[`.evn.local`](./sample/.env.local)を`app`直下に配置する(sample は設定値は空のため適時埋めること)
 
 ```
-$ vi ./.env.local
+$ vi .env.local
 ```
 
 #### `.env.local`の編集
