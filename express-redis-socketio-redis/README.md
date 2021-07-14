@@ -1,6 +1,8 @@
 # express-redis-socketio-redis
 
-socket-io を使ったチャットを複数サーバから行うために redis を用いた例
+socket-io を使ったチャットを複数サーバから行うために redis で pub/sub を用いたサンプルコード
+
+![demo](./demo.gif)
 
 ## SetUp
 
@@ -24,7 +26,7 @@ node main.js --bind 0.0.0.0
 
 ## Memo
 
-redis-cli pubsub の確認
+redis-cli pub/sub の確認
 
 monitor
 
