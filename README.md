@@ -11,3 +11,5 @@ JavaScript 関連のサンプルコード
 socket-io を使ったチャットを複数サーバから行うために redis を用いた例
 
 ## [react-firebase-sample](./react-firebase-sample)
+
+React アプリから Firebase Realtime Database を利用するサンプルコードと合わせて Firebase Hosting にデプロイ例
