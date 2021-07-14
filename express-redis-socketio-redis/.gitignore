@@ -1,6 +1,5 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/macos,node,react
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,node,react
+# Created by https://www.toptal.com/developers/gitignore/api/node,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,macos
 
 ### macOS ###
 # General
@@ -151,17 +150,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-### react ###
-.DS_*
-**/*.backup.*
-**/*.back.*
-
-node_modules
-
-*.sublime*
-
-psd
-thumb
-sketch
-
-# End of https://www.toptal.com/developers/gitignore/api/macos,node,react
+# End of https://www.toptal.com/developers/gitignore/api/node,macos
