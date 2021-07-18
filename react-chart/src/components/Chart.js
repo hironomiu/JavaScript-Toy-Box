@@ -1,13 +1,6 @@
 import { Line, Bar } from "react-chartjs-2"
 import { useState } from "react"
 
-const nextMonth = (dt) => {
-  console.log("dt s:", dt)
-  dt.setMonth(dt.getMonth() + 1)
-  console.log("dt e:", dt)
-  return dt.getMonth()
-}
-
 const options = {
   responsive: true,
   // maintainAspectRatio: false,
@@ -24,6 +17,13 @@ const options = {
 
 const Chart = () => {
   const dt = new Date(2021, 0, 1)
+
+  const nextMonth = (dt) => {
+    console.log("dt s:", dt)
+    dt.setMonth(dt.getMonth() + 1)
+    console.log("dt e:", dt)
+    return dt.getMonth()
+  }
 
   const [labels, setLabels] = useState([
     dt.getMonth() + 1 + " 月",
@@ -74,7 +74,7 @@ const Chart = () => {
   const [title] = useState("東京の降水量の月合計値（mm）(2020年)")
   const divStyle = {
     textAlign: "center",
-    aspectRatio: "auto 768 / 384",
+    aspectRatio: "auto",
     minWidth: "300px",
   }
   const grid = {
