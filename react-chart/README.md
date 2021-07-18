@@ -1,5 +1,7 @@
 # react-chart
 
+[公式](https://www.chartjs.org/)
+
 React で`react-chartjs-2`,`chart.js`を用いたグラフ描写
 
 ```

@@ -1,5 +1,4 @@
-import { Line } from "react-chartjs-2"
-import { Bar } from "react-chartjs-2"
+import { Line, Bar } from "react-chartjs-2"
 import { useState } from "react"
 
 const nextMonth = (dt) => {
@@ -7,6 +6,20 @@ const nextMonth = (dt) => {
   dt.setMonth(dt.getMonth() + 1)
   console.log("dt e:", dt)
   return dt.getMonth()
+}
+
+const options = {
+  responsive: true,
+  // maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "サンプルチャート",
+    },
+  },
 }
 
 const Chart = () => {
@@ -59,20 +72,35 @@ const Chart = () => {
   }
 
   const [title] = useState("東京の降水量の月合計値（mm）(2020年)")
+  const divStyle = {
+    display: "grid",
+    textAlign: "center",
+    width: "780px",
+  }
+  const grid = {
+    display: "grid",
+    gridTemplateColumns: "400px 800px 200px",
+  }
   return (
     <>
-      <button
-        onClick={() => {
-          setLabels((labels) => [...labels, nextMonth(dt) + 1 + " 月"])
-          setDataSet((dataSet) => [...dataSet, 200])
-        }}
-      >
-        add data
-      </button>
-      <h1>Line:{title}</h1>
-      <Line data={data} />
-      <h1>Bar:{title}</h1>
-      <Bar data={data} />
+      <div style={grid}>
+        <div></div>
+        <div style={divStyle}>
+          <button
+            onClick={() => {
+              setLabels((labels) => [...labels, nextMonth(dt) + 1 + " 月"])
+              setDataSet((dataSet) => [...dataSet, 200])
+            }}
+          >
+            add data
+          </button>
+          <h1>Line:{title}</h1>
+          <Line data={data} options={options} />
+          <h1>Bar:{title}</h1>
+          <Bar data={data} options={options} />
+        </div>
+      </div>
+      <div></div>
     </>
   )
 }
