@@ -73,7 +73,6 @@ const Chart = () => {
 
   const [title] = useState("東京の降水量の月合計値（mm）(2020年)")
   const divStyle = {
-    // display: "grid",
     textAlign: "center",
     aspectRatio: "auto 768 / 384",
     minWidth: "300px",
