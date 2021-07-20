@@ -1,5 +1,5 @@
 import { Line, Bar } from 'react-chartjs-2'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const backgroundColor = [
   'rgba(255, 99, 132, 1)',
@@ -21,25 +21,9 @@ const borderColor = [
 
 const dt = new Date(2020, 11, 1)
 
-const options = {
-  responsive: true,
-  // maintainAspectRatio: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'サンプルチャート',
-    },
-    aspectRatio: '1',
-  },
-}
-
 const nextMonthFunc = (dt) => {
   return () => {
     dt.setMonth(dt.getMonth() + 1)
-    console.log('dt', dt)
     return dt.getMonth()
   }
 }
@@ -47,25 +31,52 @@ const nextMonthFunc = (dt) => {
 const nextMonth = nextMonthFunc(dt)
 
 const Chart = () => {
-  const [labels, setLabels] = useState([
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-    nextMonth() + 1 + ' 月',
-  ])
+  console.log('hoge')
+  const options = {
+    responsive: true,
+    // maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'サンプルチャート',
+      },
+      aspectRatio: '1',
+    },
+  }
 
-  const [dataSet, setDataSet] = useState([
-    135.0, 15.0, 131.0, 296.5, 118.0, 212.5, 270.5, 61.5, 117.5, 205.0, 14.5,
-    13.0,
-  ])
+  const [labels, setLabels] = useState([])
+
+  const [dataSet, setDataSet] = useState([])
+
+  useEffect(() => {
+    setLabels((label) => [
+      ...label,
+      ...[
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+        nextMonth() + 1 + ' 月',
+      ],
+    ])
+    setDataSet((data) => [
+      ...data,
+      ...[
+        135.0, 15.0, 131.0, 296.5, 118.0, 212.5, 270.5, 61.5, 117.5, 205.0,
+        14.5, 13.0,
+      ],
+    ])
+  }, [])
   const data = {
     labels: labels,
     datasets: [
@@ -81,6 +92,7 @@ const Chart = () => {
   }
 
   const [title] = useState('東京の降水量の月合計値（mm）(2020年)')
+
   const divStyle = {
     textAlign: 'center',
     // aspectRatio: "auto 1/1",
