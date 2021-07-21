@@ -111,7 +111,10 @@ const Chart = () => {
               e.preventDefault()
               const next = nextMonth()
               setLabels((labels) => [...labels, next + 1 + ' 月'])
-              setDataSet((dataSet) => [...dataSet, 200])
+              setDataSet((dataSet) => [
+                ...dataSet,
+                Math.trunc(Math.random() * 301),
+              ])
             }}
           >
             add data
