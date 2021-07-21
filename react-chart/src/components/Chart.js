@@ -96,15 +96,21 @@ const Chart = () => {
     // aspectRatio: "auto 1/1",
     minWidth: '300px',
   }
+
   const grid = {
     display: 'grid',
     width: '100%',
     gridTemplateColumns: '1fr 4fr 1fr',
   }
+
+  const h1 = {
+    color: 'rgb(111 121 130)',
+  }
+
   return (
     <>
       <div style={grid}>
-        <div>left</div>
+        <div></div>
         <div style={divStyle}>
           <button
             onClick={(e) => {
@@ -119,12 +125,12 @@ const Chart = () => {
           >
             add data
           </button>
-          <h1>Line:{title}</h1>
+          <h1 style={h1}>Line:{title}</h1>
           <Line data={data} options={options} />
-          <h1>Bar:{title}</h1>
+          <h1 style={h1}>Bar:{title}</h1>
           <Bar data={data} options={options} />
         </div>
-        <div>right</div>
+        <div></div>
       </div>
     </>
   )

@@ -5,6 +5,16 @@
 
 React で`react-chartjs-2`,`chart.js`を用いたグラフ描写
 
+![demo](./demo.gif)
+
+## SetUp
+
+```
+yarn install
+```
+
+## Memo
+
 ```
 yarn add react-chartjs-2 chart.js
 ```
