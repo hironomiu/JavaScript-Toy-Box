@@ -29,29 +29,27 @@ const nextMonthFunc = (dt) => {
 }
 
 const nextMonth = nextMonthFunc(dt)
+let options = {}
 
 const Chart = () => {
-  console.log('hoge')
-  const options = {
-    responsive: true,
-    // maintainAspectRatio: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'サンプルチャート',
-      },
-      aspectRatio: '1',
-    },
-  }
-
   const [labels, setLabels] = useState([])
-
   const [dataSet, setDataSet] = useState([])
 
   useEffect(() => {
+    options = {
+      responsive: true,
+      // maintainAspectRatio: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'サンプルチャート',
+        },
+        aspectRatio: '1',
+      },
+    }
     setLabels((label) => [
       ...label,
       ...[
@@ -112,7 +110,6 @@ const Chart = () => {
             onClick={(e) => {
               e.preventDefault()
               const next = nextMonth()
-              console.log('next', next)
               setLabels((labels) => [...labels, next + 1 + ' 月'])
               setDataSet((dataSet) => [...dataSet, 200])
             }}
