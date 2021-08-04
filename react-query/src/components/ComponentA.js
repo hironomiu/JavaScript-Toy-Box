@@ -2,7 +2,7 @@ import React from 'react'
 import { useQueryTasks } from '../hooks/useReactQuery'
 import { useHistory } from 'react-router-dom'
 
-const divClass = {
+const divStyle = {
   textAlign: 'center',
 }
 
@@ -14,7 +14,7 @@ const ComponentA = () => {
   if (status === 'error') return <div>{'error'}</div>
 
   return (
-    <div style={divClass}>
+    <div style={divStyle}>
       <h1>ComponentA</h1>
       {data.map((user) => (
         <p key={user.id}>{user.name}</p>

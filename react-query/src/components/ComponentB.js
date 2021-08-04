@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useQueryClient } from 'react-query'
 
-const divClass = {
+const divStyle = {
   textAlign: 'center',
 }
 
@@ -12,14 +12,10 @@ const ComponentB = () => {
   const data = queryClient.getQueryData()
 
   return (
-    <div style={divClass}>
+    <div style={divStyle}>
       <h1>ComponentB</h1>
       {data
-        ? data.map((user) => (
-            <p className={divClass} key={user.id}>
-              {user.name}
-            </p>
-          ))
+        ? data.map((user) => <p key={user.id}>{user.name}</p>)
         : history.push('/')}
       <button onClick={() => history.push('/')}>push</button>
     </div>
