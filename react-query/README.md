@@ -6,6 +6,8 @@ react-query の実装サンプル
 
 ![demo](./demo.gif)
 
+API は[Docker-DockerCompose-Training/recipe-2-1/sample/express-app/](https://github.com/hironomiu/Docker-DockerCompose-Training/tree/main/recipe-2-1/sample/express-app)を利用
+
 ## setup
 
 ```
