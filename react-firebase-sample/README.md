@@ -311,7 +311,7 @@ Chrome DevTools を開き API キーで検索してみましょう
 
 ## デプロイ
 
-ビルド
+### ビルド
 
 ```
 $ yarn build
@@ -344,6 +344,25 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
+CTRL-C で停止しアプリのホームディレクトリに戻る
+
+```
+$ cd ..
+```
+
+### GitHub レポ
+
+今回のアプリケーションを GitHub に push する
+
+```
+git init
+git add .
+git commit -m "commited"
+git push origin main
+```
+
+### Firebase Hosting
+
 「Hosting」を押下
 
 ![deploy-01](./images/deploy-01.png)
@@ -355,14 +374,18 @@ Hit CTRL-C to stop the server
 ローカルインストール
 
 ```
+
 $ yarn add --dev firebase-tools
+
 ```
 
 確認
 
 ```
+
 $ npx firebase -V
 9.4.0
+
 ```
 
 「次へ」を押下
@@ -374,50 +397,53 @@ $ npx firebase -V
 ![deploy-04](./images/deploy-04.png)
 
 ```
+
 $ npx firebase login
 Already logged in as xxxxx@gmail.com
+
 ```
 
 矢印などで上下させ「Hosting」を選択しスペースを押下しエンターを押下
 
 ```
+
 $ npx firebase init
-     ######## #### ########  ######## ########     ###     ######  ########
-     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
-     ######    ##  ########  ######   ########  #########  ######  ######
-     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
-     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+######## #### ######## ######## ######## ### ###### ######## ## ## ## ## ## ## ## ## ## ## ## ###### ## ######## ###### ######## ######### ###### ###### ## ## ## ## ## ## ## ## ## ## ## ## #### ## ## ######## ######## ## ## ###### ########
 You're about to initialize a Firebase project in this directory:
-  /Users/Desktop/test
+/Users/Desktop/test
 ? Which Firebase CLI features do you want to set up for this folder? Press Space to select featur
 es, then Enter to confirm your choices. (Press <space> to select, <a> to toggle all, <i> to inver
 t selection)
- ◯ Database: Configure Firebase Realtime Database and deploy rules
- ◯ Firestore: Deploy rules and create indexes for Firestore
- ◯ Functions: Configure and deploy Cloud Functions
+◯ Database: Configure Firebase Realtime Database and deploy rules
+◯ Firestore: Deploy rules and create indexes for Firestore
+◯ Functions: Configure and deploy Cloud Functions
 ❯◯ Hosting: Configure and deploy Firebase Hosting sites
- ◯ Storage: Deploy Cloud Storage security rules
- ◯ Emulators: Set up local emulators for Firebase features
- ◯ Remote Config: Get, deploy, and rollback configurations for Remote Config
+◯ Storage: Deploy Cloud Storage security rules
+◯ Emulators: Set up local emulators for Firebase features
+◯ Remote Config: Get, deploy, and rollback configurations for Remote Config
+
 ```
 
 「Use an existing project」を選択しエンターを押下
 
 ```
+
 === Project Setup
 First, let's associate this project directory with a Firebase project.
 You can create multiple project aliases by running firebase use --add,
 but for now we'll just set up a default project.
 ? Please select an option: (Use arrow keys)
 ❯ Use an existing project
-  Create a new project
-  Add Firebase to an existing Google Cloud Platform project
-  Don't set up a default project
+Create a new project
+Add Firebase to an existing Google Cloud Platform project
+Don't set up a default project
+
 ```
 
 今回作成したプロジェクトを選択しエンターを押下
 
 ```
+
 === Project Setup
 First, let's associate this project directory with a Firebase project.
 You can create multiple project aliases by running firebase use --add,
@@ -425,68 +451,86 @@ but for now we'll just set up a default project.
 ? Please select an option: Use an existing project
 ? Select a default Firebase project for this directory: (Use arrow keys)
 ❯ fir-react-sample (firebase-react-sample)
-  xxxxxx (xxxxxx)
-  yyyyyy (yyyyyy)
+xxxxxx (xxxxxx)
+yyyyyy (yyyyyy)
+
 ```
 
 `build`を入力しエンターを押下
 
 ```
+
 === Hosting Setup
 Your public directory is the folder (relative to your project directory) that
 will contain Hosting assets to be uploaded with firebase deploy. If you
 have a build process for your assets, use your build's output directory.
 ? What do you want to use as your public directory? build
+
 ```
 
 「y」を押下
 
 ```
+
 ? Configure as a single-page app (rewrite all urls to /index.html)? Yes
-```
-
-「n」「n」を押下
 
 ```
-? Set up automatic builds and deploys with GitHub? No
+
+「y」を押下(GitHub)
+
+```
+
+? Set up automatic builds and deploys with GitHub? Yes
+
+```
+
+「n」を押下
+
+```
+
 ? File build/index.html already exists. Overwrite? No
-i  Skipping write of build/index.html
-i  Writing configuration info to firebase.json...
-i  Writing project information to .firebaserc...
-✔  Firebase initialization complete!
+i Skipping write of build/index.html
+i Writing configuration info to firebase.json...
+i Writing project information to .firebaserc...
+✔ Firebase initialization complete!
+
 ```
 
 `firebase.json`を確認
 
 ```
+
 $ cat firebase.json
 {
-  "hosting": {
-    "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+"hosting": {
+"public": "build",
+"ignore": [
+"firebase.json",
+"**/.*",
+"**/node_modules/**"
+],
+"rewrites": [
+{
+"source": "**",
+"destination": "/index.html"
 }
+]
+}
+}
+
 ```
 
 `.firebaserc`を確認
 
 ```
+
 $ cat .firebaserc
 {
-  "projects": {
-    "default": "fir-react-sample"
-  }
+"projects": {
+"default": "fir-react-sample"
 }
+}
+
 ```
 
 「次へ」を押下
@@ -498,21 +542,23 @@ $ cat .firebaserc
 デプロイが成功したら「Hosting URL」をブラウザで開く
 
 ```
+
 $ npx firebase deploy
 === Deploying to ‘fir-react-sample’...
 
-i  deploying hosting
-i  hosting[fir-react-sample]: beginning deploy...
-i  hosting[fir-react-sample]: found 14 files in build
-✔  hosting[fir-react-sample]: file upload complete
-i  hosting[fir-react-sample]: finalizing version...
-✔  hosting[fir-react-sample]: version finalized
-i  hosting[fir-react-sample]: releasing new version...
-✔  hosting[fir-react-sample]: release complete
-✔  Deploy complete!
+i deploying hosting
+i hosting[fir-react-sample]: beginning deploy...
+i hosting[fir-react-sample]: found 14 files in build
+✔ hosting[fir-react-sample]: file upload complete
+i hosting[fir-react-sample]: finalizing version...
+✔ hosting[fir-react-sample]: version finalized
+i hosting[fir-react-sample]: releasing new version...
+✔ hosting[fir-react-sample]: release complete
+✔ Deploy complete!
 
 Project Console: https://console.firebase.google.com/project/fir-react-sample-xxxx/overview
 Hosting URL: https://fir-react-sample-xxxx.web.app
+
 ```
 
 「コンソールにすすむ」を押下
@@ -520,3 +566,7 @@ Hosting URL: https://fir-react-sample-xxxx.web.app
 ![deploy-05](./images/deploy-05.png)
 
 Git で管理している場合は`.gitignore`に`.firebase`,`.firebaserc`,`firebase.json`を追記する
+
+```
+
+```
