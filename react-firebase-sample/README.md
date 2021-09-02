@@ -172,7 +172,7 @@ $ yarn start
 
 #### firbase.js
 
-[Firebase:read-and-write](https://firebase.google.com/docs/database/web/read-and-write)
+[参考公式：Firebase:read-and-write](https://firebase.google.com/docs/database/web/read-and-write)
 
 `src`直下に[`firebase.js`](./sample/src/firebase.js)として作成
 
