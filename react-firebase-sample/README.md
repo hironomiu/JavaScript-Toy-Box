@@ -429,7 +429,7 @@ but for now we'll just set up a default project.
   yyyyyy (yyyyyy)
 ```
 
-`build`を入力しエンターを押下、「y」「n」「n」を押下
+`build`を入力しエンターを押下
 
 ```
 === Hosting Setup
@@ -437,7 +437,17 @@ Your public directory is the folder (relative to your project directory) that
 will contain Hosting assets to be uploaded with firebase deploy. If you
 have a build process for your assets, use your build's output directory.
 ? What do you want to use as your public directory? build
+```
+
+「y」を押下
+
+```
 ? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+```
+
+「n」「n」を押下
+
+```
 ? Set up automatic builds and deploys with GitHub? No
 ? File build/index.html already exists. Overwrite? No
 i  Skipping write of build/index.html
