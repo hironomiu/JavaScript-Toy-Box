@@ -2,8 +2,14 @@
 
 ## すること
 
-1. React アプリから Firebase Realtime Database を利用
-2. Firebase Hosting にデプロイ
+1. React アプリから Firebase Realtime Database を利用  
+   1-1. Firebase GUI にてアプリの登録  
+   1-2. Firebase GUI にて Realtime Database の設定  
+   1-3. Firebase GUI にて Hosting の設定  
+   1-4. React にて Firebase Realtime Database と連携し簡単なチャットアプリの実装
+2. 1.で作成したアプリを Firebase Hosting にデプロイ  
+   2-1. GitHub Actions から Firebase Hosting にデプロイ  
+   2-2. Firebase Cli から Firebase Hosting にデプロイ
 
 ## 前提
 
