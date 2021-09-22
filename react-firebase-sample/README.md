@@ -12,13 +12,13 @@
 - React アプリが構築できること(参考 node.js,npm,yarn のバージョン)
   ```
   $ node -v
-  v14.15.1
+  v16.2.0
   $ npm -v
-  6.14.11
+  7.19.1
   $ yarn -v
-  1.22.5
+  1.22.10
   $ npx -v
-  6.14.11
+  7.19.1
   ```
 
 ## 公式ドキュメント
@@ -82,7 +82,7 @@
 
 ![firebase-web-02](./images/firebase-web-02.png)
 
-スクリプトをクリップボードにコピーし「コンソールに進む」を押下
+スクリプトをクリップボードにコピーし「コンソールに進む」を押下(`npm install firebase`は`react`の環境を構築後に行う)
 
 ![firebase-web-03](./images/firebase-web-03.png)
 
