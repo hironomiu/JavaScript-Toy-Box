@@ -436,7 +436,7 @@ $ yarn add --dev firebase-tools
 ```
 
 $ npx firebase -V
-9.4.0
+9.18.0
 
 ```
 
@@ -455,11 +455,12 @@ Already logged in as xxxxx@gmail.com
 
 ```
 
-矢印などで上下させ「Hosting」を選択しスペースを押下しエンターを押下
+矢印などで上下させ「Hosting: Configure」をを選択しスペースを押下しエンターを押下
 
 ```
 
 $ npx firebase init
+
 ######## #### ######## ######## ######## ### ###### ######## ## ## ## ## ## ## ## ## ## ## ## ###### ## ######## ###### ######## ######### ###### ###### ## ## ## ## ## ## ## ## ## ## ## ## #### ## ## ######## ######## ## ## ###### ########
 You're about to initialize a Firebase project in this directory:
 /Users/Desktop/test
@@ -473,7 +474,6 @@ t selection)
 ◯ Storage: Deploy Cloud Storage security rules
 ◯ Emulators: Set up local emulators for Firebase features
 ◯ Remote Config: Get, deploy, and rollback configurations for Remote Config
-
 ```
 
 「Use an existing project」を選択しエンターを押下
@@ -506,6 +506,16 @@ but for now we'll just set up a default project.
 xxxxxx (xxxxxx)
 yyyyyy (yyyyyy)
 
+```
+
+リポジトリの選択
+
+```
+Waiting for authentication...
+
+✔  Success! Logged into GitHub as hironomiu
+
+? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) (hironomiu/firebase-react-sample)
 ```
 
 `build`を入力しエンターを押下
@@ -546,6 +556,40 @@ i Writing configuration info to firebase.json...
 i Writing project information to .firebaserc...
 ✔ Firebase initialization complete!
 
+```
+
+`Firebase CLI GitHub Login Successful` が表示されること
+
+![deploy-04b](./images/deploy-04b.png)
+
+エンターを押下
+
+```
+? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) hironomiu/firebase-react-sample
+```
+
+y を押下
+
+```
+? Set up the workflow to run a build script before every deploy? Yes
+```
+
+`yarn build`を記入
+
+```
+? What script should be run before every deploy? yarn build
+```
+
+y を押下
+
+```
+? Set up automatic deployment to your site's live channel when a PR is merged? Yes
+```
+
+`main`を選択
+
+```
+? What is the name of the GitHub branch associated with your site's live channel? main
 ```
 
 `firebase.json`を確認
@@ -617,8 +661,23 @@ Hosting URL: https://fir-react-sample-xxxx.web.app
 
 ![deploy-05](./images/deploy-05.png)
 
-Git で管理している場合は`.gitignore`に`.firebase`,`.firebaserc`,`firebase.json`を追記する
+ブラウザにて Hosting に設定されているドメインをクリックしアプリが動作することを確認する
+
+ここまでに作成されたファイルを add,commit し push する
 
 ```
+git add .
+git commit -m "commited"
+git push origin main
+```
+
+GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`- run: yarn build`の前に`- run: yarn add react-scripts`を追記する
 
 ```
+      - run: yarn add react-scripts
+      - run: yarn build
+```
+
+`add,commit,push`し GitHub Actions がグリーンとなること
+
+![deploy-06](./images/deploy-06.png)
