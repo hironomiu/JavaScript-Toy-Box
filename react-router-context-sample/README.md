@@ -1,6 +1,6 @@
 # react-router-context-sample
 
-BrowserRouter,Context を使いグローバルでデータの保持、ログイン、画面遷移、ログアウトの簡単なサンプルアプリ
+BrowserRouter,Context を使いグローバルでデータの保持、ログイン、画面遷移、ログアウトの簡単なサンプルアプリ(CSS は Tailwind を利用)
 
 ![demo](./demo.gif)
 
