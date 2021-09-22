@@ -669,12 +669,33 @@ git commit -m "commited"
 git push origin main
 ```
 
-GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`- run: yarn build`の前に`- run: yarn add react-scripts`を追記する
+`yarn build`では GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`- run: yarn build`の前に`- run: yarn add react-scripts`を追記する
 
 ```
       - run: yarn add react-scripts
       - run: yarn build
 ```
+
+Secrets の設定を`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`jobs:`の上に以下を追記する
+
+```
+env:
+  REACT_APP_FIREBASE_API_KEY: ${{secrets.REACT_APP_FIREBASE_API_KEY}}
+  REACT_APP_FIREBASE_AUTH_DOMAIN: ${{secrets.REACT_APP_FIREBASE_AUTH_DOMAIN}}
+  REACT_APP_FIREBASE_DATABASE_URL: ${{secrets.REACT_APP_FIREBASE_DATABASE_URL}}
+  REACT_APP_FIREBASE_PROJECT_ID: ${{secrets.REACT_APP_FIREBASE_PROJECT_ID}}
+  REACT_APP_FIREBASE_STORAGE_BUCKET: ${{secrets.REACT_APP_FIREBASE_STORAGE_BUCKET}}
+  REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}}
+  REACT_APP_FIREBASE_APP_ID: ${{secrets.REACT_APP_FIREBASE_APP_ID}}
+```
+
+GitHub リポジトリの`Settings` -> `Secrets`,`Actions` -> `New repository secret`を押下
+
+![secrets-01](./images/secrets-01.png)
+
+`.env.local`に設定した`REACT_APP_FIREBASE_API_KEY`から`REACT_APP_FIREBASE_APP_ID`を Name,Value に 1 つずつ設定し`Add secret`を押下
+
+![secrets-02](./images/secrets-02.png)
 
 `add,commit,push`し GitHub Actions がグリーンとなること
 
