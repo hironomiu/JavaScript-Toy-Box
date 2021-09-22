@@ -92,11 +92,11 @@
 
 #### React ベースアプリの作成
 
-`app`ディレクトリを作成し遷移後`create-react-app`で React ベースアプリを作成する
+任意のディレクトリ（プロジェクト名と合わせる場合は`firebase-react-sample`)を作成し遷移後`create-react-app`で React ベースアプリを作成する
 
 ```
-$ mkdir app
-$ cd app
+$ mkdir firebase-react-sample
+$ cd firebase-react-sample
 $ npx create-react-app .
 ```
 
