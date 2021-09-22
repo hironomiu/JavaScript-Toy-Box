@@ -596,22 +596,21 @@ y を押下
 
 ```
 
-$ cat firebase.json
 {
-"hosting": {
-"public": "build",
-"ignore": [
-"firebase.json",
-"**/.*",
-"**/node_modules/**"
-],
-"rewrites": [
-{
-"source": "**",
-"destination": "/index.html"
-}
-]
-}
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
 
 ```
@@ -620,11 +619,10 @@ $ cat firebase.json
 
 ```
 
-$ cat .firebaserc
 {
-"projects": {
-"default": "fir-react-sample"
-}
+  "projects": {
+    "default": "fir-react-sample"
+  }
 }
 
 ```
