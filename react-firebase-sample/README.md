@@ -116,18 +116,43 @@ $ yarn start
 
 #### App.js の修正
 
-[`App.js`](./sample/src/components/App.js)を`src/components`に移動し変更する
+[`App.js`](./sample/src/components/App.js)を`src/components`に移動し以下に変更する
+
+```
+import React from "react"
+
+const App = () => {
+  return <div>hello</div>
+}
+
+export default App
+```
 
 #### index.js の修正
 
-[`index.js`](./sample/src/index.js)を import している`App`を`components/App`にパスを修正しその他変更する
+[`index.js`](./sample/src/index.js)を import している`App`を`components/App`にパスを修正しその他以下に変更する
+
+```
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "./components/App"
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+)
+```
+
+ブラウザをリロードし`hello`が表示されていれば修正は成功
 
 #### firebase モジュールのインストール
 
 確認
 
 ```
-$ npm info firebase
+$ yarn info firebase
 ```
 
 インストール
@@ -162,12 +187,6 @@ REACT_APP_FIREBASE_PROJECT_ID=''
 REACT_APP_FIREBASE_STORAGE_BUCKET=''
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=''
 REACT_APP_FIREBASE_APP_ID=''
-```
-
-`.env.local`を反映させるため、Ctrl+C で停止し改めて`yarn start`でスタートする
-
-```
-$ yarn start
 ```
 
 ### 開発
@@ -209,6 +228,12 @@ export const messagesRef = database.ref('messages')
 export const pushMessage = ({ name, text }) => {
   messagesRef.push({ name, text })
 }
+```
+
+`.env.local`を反映させるため、Ctrl+C で停止し改めて`yarn start`でスタートする
+
+```
+$ yarn start
 ```
 
 #### メッセージデータの投稿
@@ -307,7 +332,7 @@ export default App
 
 ### 確認
 
-Chrome DevTools を開き API キーで検索してみましょう
+Chrome DevTools を開き`Sources`->`localhost:3000`を右クリックし API キー(`REACT_APP_FIREBASE_API_KEY`)で検索してみましょう
 
 ![dev-tools-01](./images/dev-tools-01.png)
 
@@ -320,7 +345,7 @@ $ yarn build
 ✨  Done in 10.65s.
 ```
 
-`build`ディクレトリが作成されていることを確認後、ブラウザで`http://127.0.0.1:8080`を開き動作確認を行う。(停止は CTRL+C)
+`build`ディクレトリが作成されていることを確認
 
 ```
 $ ll build
@@ -335,6 +360,11 @@ drwxr-xr-x  15 h-miura  staff   480  2 18 16:21 ..
 -rw-r--r--   1 h-miura  staff   492  2 18 16:13 manifest.json
 -rw-r--r--   1 h-miura  staff    67  2 18 16:13 robots.txt
 drwxr-xr-x   3 h-miura  staff    96  2 18 16:13 static
+```
+
+`build`ディレクトリに遷移し`http-server`でアプリを起動しブラウザで`http://127.0.0.1:8080`を開き動作確認を行う。(停止は CTRL+C)
+
+```
 $ cd build
 $ npx http-server
 npx: 23個のパッケージを2.34秒でインストールしました。
@@ -353,6 +383,26 @@ $ cd ..
 ```
 
 ### GitHub レポ
+
+(この章は GitHub で管理、デプロイする際に必要な手順です、GitHub にて管理やデプロイしない場合は不要です)
+
+GitHub にて今回用のリポジトリを作成する`New repository`を押下
+
+![git-repo-01](./images/git-repo-01.png)
+
+`Repository name`を記入し`Create repository`を押下
+
+![git-repo-02](./images/git-repo-02.png)
+
+利用するプロトコルの選択し下部赤枠をコピーし実行する
+
+![git-repo-03](./images/git-repo-03.png)
+
+```
+git remote add origin git@github.com:hironomiu/firebase-react-sample.git
+git branch -M main
+git push -u origin main
+```
 
 今回のアプリケーションを GitHub に push する
 
