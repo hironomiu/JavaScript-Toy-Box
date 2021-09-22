@@ -86,7 +86,7 @@
 
 ![firebase-web-03](./images/firebase-web-03.png)
 
-`.env.local`を作成しクリップボードにコピーした内容をペーストする(後ほど.gitignore に指定すること)
+一時的なファイルを作成しクリップボードにコピーした内容をペーストする
 
 ### 準備(React)
 
@@ -99,6 +99,8 @@ $ mkdir firebase-react-sample
 $ cd firebase-react-sample
 $ npx create-react-app .
 ```
+
+一時的に退避したファイルを`.env.local`として作成しクリップボードにコピーした内容をペーストする(除外指定されていない場合は後ほど.gitignore に指定すること)
 
 #### React アプリの起動
 
