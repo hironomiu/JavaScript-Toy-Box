@@ -681,3 +681,5 @@ GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-me
 `add,commit,push`し GitHub Actions がグリーンとなること
 
 ![deploy-06](./images/deploy-06.png)
+
+アプリを変更し`npx firebase deploy`や`git push`にて Hosting 先が変更されることを確認してみましょう
