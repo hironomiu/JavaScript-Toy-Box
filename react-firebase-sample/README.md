@@ -413,7 +413,6 @@ git push -u origin main
 今回のアプリケーションを GitHub に push する
 
 ```
-git init
 git add .
 git commit -m "commited"
 git push origin main
