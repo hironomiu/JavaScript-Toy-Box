@@ -6,6 +6,10 @@ BrowserRouter,Context を使いグローバルでデータの保持、ログイ�
 
 ## SetUp
 
+### React tailwind craco
+
+`create-react-app`と必要なパッケージのインストール
+
 ```
 npx create-react-app .
 yarn add react-router-dom
@@ -13,23 +17,31 @@ yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer
 yarn add @craco/craco
 ```
 
-`package.json`を`craco`で script を構成する
+`package.json`の script を`craco`で構成する
+
+before
 
 ```
--    "start": "react-scripts start",
--    "build": "react-scripts build",
--    "test": "react-scripts test",
-
-+     "start": "craco start",
-+     "build": "craco build",
-+     "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
 ```
 
-`craco.config.js`
+after(`eject`は削除)
+
+```
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
+```
+
+`craco.config.js`を作成（`touch`ではなく VSCode からファイル作成でも良い）
 
 ```
 touch craco.config.js
 ```
+
+作成した`craco.config.js`に以下を記述
 
 ```
 module.exports = {
@@ -41,15 +53,15 @@ module.exports = {
 }
 ```
 
-## tailwind init
+### tailwind init
+
+tailwind の初期化
 
 ```
-
 npx tailwindcss init -p
-
 ```
 
-`tailwind.config.js`
+`tailwind.config.js`の`purge`を修正
 
 ```
 
@@ -59,7 +71,7 @@ npx tailwindcss init -p
 
 ```
 
-`./src/index.css`
+`./src/index.css`を tailwind を利用する設定に修正（以下の 3 行に全てを書き換え）
 
 ```
 
@@ -69,7 +81,9 @@ npx tailwindcss init -p
 
 ```
 
-## Modal
+### Modal
+
+モーダル用のパッケージのインストール
 
 `@headlessui/react`
 
@@ -79,11 +93,41 @@ yarn add @headlessui/react
 
 ### icon
 
+アイコン用のパッケージのインストール
+
 `@heroicons/react`
 
 ```
 yarn add @heroicons/react
 ```
+
+## 起動
+
+テンプレートが動作することを確認
+
+```
+yarn start
+```
+
+## Step1
+
+`src/App.js`を一旦`hello`だけ表示させる
+
+```
+import React from 'react'
+
+const App = () => {
+  return <div>hello</div>
+}
+
+export default App
+```
+
+### context の作成
+
+`src`配下に`context`ディレクトリを作成する
+
+`src/context`配下に`StateProvider.js`を作成する
 
 ## Available Scripts
 
