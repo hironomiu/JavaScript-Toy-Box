@@ -21,9 +21,7 @@ const Login = () => {
         <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
           Super Web Site!!
         </h1>
-        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">
-          Sign In
-        </h1>
+        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
         <div className="mb-4">
           <label
             className="block text-grey-darker pt-2 text-sm font-bold mb-2"
@@ -62,7 +60,7 @@ const Login = () => {
                 history.push('/')
               }}
             >
-              Sign In
+              Login
             </button>
           </div>
         </div>
