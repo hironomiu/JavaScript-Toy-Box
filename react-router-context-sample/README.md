@@ -127,7 +127,66 @@ export default App
 
 `src`配下に`context`ディレクトリを作成する
 
-`src/context`配下に`StateProvider.js`を作成する
+`src/context`配下に`StateProvider.js`を作成し`serviceName`を定義した以下を記述する
+
+```
+import { createContext, useContext } from 'react'
+
+const StateContext = createContext({})
+
+export const StateProvider = ({ children }) => {
+  const serviceName = 'Super Web Site'
+
+  return (
+    <StateContext.Provider value={{ serviceName }}>
+      {children}
+    </StateContext.Provider>
+  )
+}
+
+export const useStateContext = () => useContext(StateContext)
+```
+
+### Layout.js の作成
+
+`src`配下に`components`ディレクトリを作成する
+
+`src/components`配下に`Layout.js`を作成し`context`で定義した`serviceName`を表示する以下を記述する
+
+```
+import React from 'react'
+import { useStateContext } from '../context/StateProvider'
+
+const Layout = ({ children }) => {
+  const { serviceName } = useStateContext()
+
+  return <div>{serviceName}</div>
+}
+
+export default Layout
+```
+
+### App.js の修正
+
+`App.js`に`context`,`Layout`を組み込み画面に`Super Web Site`を表示する
+
+```
+import React from 'react'
+import { StateProvider } from './context/StateProvider'
+import Layout from './components/Layout'
+
+const App = () => {
+  return (
+    <div>
+      <StateProvider>
+        <Layout />
+      </StateProvider>
+    </div>
+  )
+}
+
+export default App
+```
 
 ## Available Scripts
 
