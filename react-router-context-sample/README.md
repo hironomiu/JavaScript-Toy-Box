@@ -296,7 +296,7 @@ export default Login
 
 ```
 
-`App.js`に`Login`を import し表示させる
+`App.js`に`Login`を import し`Login`,`Layout`を表示させる
 
 ```
 import { StateProvider } from './context/StateProvider'
