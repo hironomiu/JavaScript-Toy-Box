@@ -111,6 +111,8 @@ yarn start
 
 ## Step1
 
+ゴール：`Layout`,`Login`の画面を作成し表示させる
+
 `src/App.js`を一旦`hello`だけ表示させる
 
 ```
@@ -228,7 +230,7 @@ const Login = () => {
           <p className="">Please choose a password.</p>
         </div>
         <div className="">
-          <button className="">Login</button>
+          <button type="button" className="">Login</button>
         </div>
       </div>
     </div>
@@ -283,9 +285,10 @@ const Login = () => {
           <p className="text-red text-xs italic">Please choose a password.</p>
         </div>
         <div className="flex items-center justify-between">
-          <button className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">
-            Login
-          </button>
+          <button
+            type="button"
+            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+          >
         </div>
       </div>
     </div>
@@ -315,6 +318,228 @@ const App = () => {
 }
 
 export default App
+```
+
+## Step2
+
+ゴール：
+
+### context
+
+`src/context/StateProvider.js`にログイン状態の State(`useState`の import,`isLogin,setIsLogin`の宣言,`StateContext.Provider`に設定) を設定する
+
+```
+import { createContext, useContext, useState } from 'react'
+
+const StateContext = createContext({})
+
+export const StateProvider = ({ children }) => {
+  const serviceName = 'Super Web Site'
+  const [isLogin, setIsLogin] = useState(false)
+
+  return (
+    <StateContext.Provider value={{ serviceName, isLogin, setIsLogin }}>
+      {children}
+    </StateContext.Provider>
+  )
+}
+
+export const useStateContext = () => useContext(StateContext)
+```
+
+### App.js
+
+`BrowserRouter, Route, Switch`を import しレイアウトを整える(一旦`Layout`を表示)
+
+```
+import React from 'react'
+import { StateProvider } from './context/StateProvider'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './components/Login'
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <StateProvider>
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Layout></Layout>
+          </Switch>
+        </StateProvider>
+      </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+```
+
+### Login.js
+
+```
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Login = () => {
+  const history = useHistory()
+  const { isLogin, setIsLogin } = useStateContext()
+
+  useEffect(() => {
+    if (isLogin) {
+      history.push('/')
+    }
+  })
+  return (
+    <div>
+      <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
+        <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
+          Super Web Site!!"
+        </h1>
+        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
+        <div className="mb-4">
+          <label
+            htmlFor="username"
+            className="block text-grey-darker pt-2 text-sm font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            autoFocus={true}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="password"
+            className="block text-grey-darker text-sm pt-2 font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="******************"
+            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+          />
+          <p className="text-red text-xs italic">Please choose a password.</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+          >
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
+```
+
+### Layout.js
+
+ログイン判定を実装し`/login`が表示されること
+
+```
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Layout = ({ children }) => {
+  const { serviceName, isLogin, setIsLogin } = useStateContext()
+  const history = useHistory()
+  useEffect(() => {
+    if (!isLogin) history.push('/login')
+  })
+
+  return <div>{serviceName}</div>
+}
+
+export default Layout
+```
+
+### Login.js(ログイン処理の実装)
+
+`button`タグに`onClick`イベント処理を追記し`Login`ボタン押下後`/`に遷移すること
+
+```
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Login = () => {
+  const history = useHistory()
+  const { isLogin, setIsLogin } = useStateContext()
+
+  useEffect(() => {
+    if (isLogin) {
+      history.push('/')
+    }
+  })
+  return (
+    <div>
+      <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
+        <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
+          Super Web Site!!"
+        </h1>
+        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
+        <div className="mb-4">
+          <label
+            htmlFor="username"
+            className="block text-grey-darker pt-2 text-sm font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            autoFocus={true}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="password"
+            className="block text-grey-darker text-sm pt-2 font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="******************"
+            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+          />
+          <p className="text-red text-xs italic">Please choose a password.</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              setIsLogin(true)
+              history.push('/')
+            }}
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
 ```
 
 ## Available Scripts
