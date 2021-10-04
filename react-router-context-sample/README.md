@@ -188,6 +188,135 @@ const App = () => {
 export default App
 ```
 
+### Login.js の作成
+
+ログインフォームは tailwindcomponents の[Login form](https://tailwindcomponents.com/component/login-form)を参考に作成
+
+`src/components`配下に`Login.js`を作成
+
+```
+import React from 'react'
+
+const Login = () => {
+  return (
+    <div>
+      <div className="">
+        <h1 className="">Supre Web Site!!</h1>
+        <h1 className="">Login</h1>
+        <div className="">
+          <label htmlFor="username" className="">
+            username
+          </label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            autoFocus={true}
+            className=""
+          />
+        </div>
+        <div className="">
+          <label htmlFor="password" className="">
+            username
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="******************"
+            className=""
+          />
+          <p className="">Please choose a password.</p>
+        </div>
+        <div className="">
+          <button className="">Login</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
+
+```
+
+`Login.js`に CSS(`tailwind`)を当てていく
+
+```
+import React from 'react'
+
+const Login = () => {
+  return (
+    <div>
+      <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
+        <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
+          Super Web Site!!"
+        </h1>
+        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
+        <div className="mb-4">
+          <label
+            htmlFor="username"
+            className="block text-grey-darker pt-2 text-sm font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            autoFocus={true}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="password"
+            className="block text-grey-darker text-sm pt-2 font-bold mb-2"
+          >
+            username
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="******************"
+            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+          />
+          <p className="text-red text-xs italic">Please choose a password.</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <button className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
+
+```
+
+`App.js`に`Login`を import し表示させる
+
+```
+import { StateProvider } from './context/StateProvider'
+import Layout from './components/Layout'
+import Login from './components/Login'
+
+const App = () => {
+  return (
+    <div>
+      <StateProvider>
+        <Login />
+        <Layout />
+      </StateProvider>
+    </div>
+  )
+}
+
+export default App
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -254,6 +383,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+
+```
 
 ```
 

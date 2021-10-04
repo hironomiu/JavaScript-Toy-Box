@@ -5,7 +5,6 @@ import { useStateContext } from '../context/StateProvider'
 const Login = () => {
   const history = useHistory()
   const { isLogin, setIsLogin } = useStateContext()
-  // const forcus = useRef(null)
 
   useEffect(() => {
     console.log('useEffect')
