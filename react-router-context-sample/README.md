@@ -322,7 +322,7 @@ export default App
 
 ## Step2
 
-ゴール：
+ゴール：ログインから Layout に遷移し、モーダルのログアウト画面からログアウト、キャンセルの実装をする
 
 ### context
 
@@ -824,6 +824,16 @@ const Layout = ({ children }) => {
 }
 
 export default Layout
+
+```
+
+## Step3
+
+ゴール：
+
+### Root.js
+
+```
 
 ```
 
