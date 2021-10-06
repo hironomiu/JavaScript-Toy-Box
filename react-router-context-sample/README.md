@@ -582,7 +582,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main></main>
+      <main>{children}</main>
       <footer className="">
         <div className="">
           <p className="">{serviceName}@2021</p>
@@ -636,7 +636,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main></main>
+      <main>{children}</main>
       <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
         <div className="flex justify-center items-center">
           <p className="pt-3">{serviceName}@2021</p>
@@ -813,7 +813,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main></main>
+      <main>{children}</main>
       <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
         <div className="flex justify-center items-center">
           <p className="pt-3">{serviceName}@2021</p>
@@ -833,7 +833,248 @@ export default Layout
 
 ### Root.js
 
+`App`に`Layout`配下で組み込むコンポーネント`Root`を`src/components/Root.js`で一旦`hello`を表示するよう作成する
+
 ```
+import React from 'react'
+
+const Root = () => {
+  return <div>Root</div>
+}
+
+export default Root
+```
+
+### App.js
+
+`Root`を組み込む
+
+```
+import React from 'react'
+import { StateProvider } from './context/StateProvider'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './components/Login'
+import Root from './components/Root'
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <StateProvider>
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Layout>
+                <Route exact path="/">
+                  <Root />
+                </Route>
+            </Layout>
+          </Switch>
+        </StateProvider>
+      </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+
+```
+
+### Layout.js
+
+`Root`の`Link`に設定する(`to='/'`の追記のみ)
+
+```
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+import { Link } from 'react-router-dom'
+import { LogoutIcon } from '@heroicons/react/outline'
+import Modal from './Modal'
+
+const Layout = ({ children }) => {
+  const { serviceName, isLogin } = useStateContext()
+  const history = useHistory()
+  const [modalOn, setModalOn] = useState(false)
+
+  useEffect(() => {
+    if (!isLogin) history.push('/login')
+  })
+
+  return (
+    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
+      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
+        <nav className="bg-gray-600 w-screen">
+          <div className="flex justify-between">
+            <div className="">
+              <span className="font-semibold text-xl tracking-tight text-white">
+                {serviceName}!!
+              </span>
+              <Link
+                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
+                to="/"
+              >
+                Root
+              </Link>
+              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
+                ComponentA
+              </Link>
+            </div>
+            <div className="">
+              <LogoutIcon
+                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
+                aria-hidden="true"
+                onClick={() => {
+                  setModalOn(true)
+                }}
+              />
+              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>{children}</main>
+      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
+        <div className="flex justify-center items-center">
+          <p className="pt-3">{serviceName}@2021</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default Layout
+
+```
+
+### ComponentA.js
+
+`src/components/ComponentA.js`を作成し一旦`ComponentA`を表示する
+
+```
+import React from 'react'
+
+const ComponentA = () => {
+  return <div>ComponentA</div>
+}
+
+export default ComponentA
+
+```
+
+### App.js
+
+`ComponentA`を組み込む
+
+```
+import React from 'react'
+import { StateProvider } from './context/StateProvider'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './components/Login'
+import Root from './components/Root'
+import ComponentA from './components/ComponentA'
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <StateProvider>
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Layout>
+              <Route exact path="/">
+                <Root />
+              </Route>
+              <Route exact path="/component-a">
+                <ComponentA />
+              </Route>
+            </Layout>
+          </Switch>
+        </StateProvider>
+      </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+
+```
+
+### Layout.js
+
+`ComponentA`の`Link`に設定し(`to='/component-a'`を追記)、`Root`以外の Location の場合 Top に戻る Link を設定
+
+```
+import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+import { Link } from 'react-router-dom'
+import { LogoutIcon } from '@heroicons/react/outline'
+import Modal from './Modal'
+
+const Layout = ({ children }) => {
+  const { serviceName, isLogin } = useStateContext()
+  const history = useHistory()
+  const location = useLocation()
+  const [modalOn, setModalOn] = useState(false)
+
+  useEffect(() => {
+    if (!isLogin) history.push('/login')
+  })
+
+  return (
+    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
+      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
+        <nav className="bg-gray-600 w-screen">
+          <div className="flex justify-between">
+            <div className="">
+              <span className="font-semibold text-xl tracking-tight text-white">
+                {serviceName}!!
+              </span>
+              <Link
+                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
+                to="/"
+              >
+                Root
+              </Link>
+              <Link
+                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
+                to="/component-a"
+              >
+                ComponentA
+              </Link>
+            </div>
+            <div className="">
+              <LogoutIcon
+                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
+                aria-hidden="true"
+                onClick={() => {
+                  setModalOn(true)
+                }}
+              />
+              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>{children}</main>
+      {location.pathname === '/' ? null : <Link to="/">Top</Link>}
+      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
+        <div className="flex justify-center items-center">
+          <p className="pt-3">{serviceName}@2021</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default Layout
+
 
 ```
 
