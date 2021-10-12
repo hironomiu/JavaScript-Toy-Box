@@ -829,7 +829,7 @@ export default Layout
 
 ## Step3
 
-ゴール：
+ゴール：`Layout`に`Root`、`ComponentA`を組み込み遷移できるようにする
 
 ### Root.js
 
@@ -1076,6 +1076,167 @@ const Layout = ({ children }) => {
 export default Layout
 
 
+```
+
+## Step4
+
+ゴール：
+
+### StateProvider.js
+
+`isOn, setIsOn`の定義
+
+```
+import { createContext, useContext, useState } from 'react'
+
+const StateContext = createContext({})
+
+export const StateProvider = ({ children }) => {
+  const serviceName = 'Super Web Site'
+  const [isLogin, setIsLogin] = useState(false)
+  const [isOn, setIsOn] = useState(false)
+
+  return (
+    <StateContext.Provider
+      value={{ serviceName, isLogin, setIsLogin, isOn, setIsOn }}
+    >
+      {children}
+    </StateContext.Provider>
+  )
+}
+
+export const useStateContext = () => useContext(StateContext)
+
+```
+
+### Root.js
+
+`ComponentA`へ遷移、toggle の実装
+
+```
+import React from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Root = () => {
+  const history = useHistory()
+  const { isOn, setIsOn } = useStateContext()
+
+  return (
+    <div className="">
+      <p className="">Root</p>
+      <p onClick={() => history.push('/component-a')}>Go ComponentA</p>
+      on? off?:{isOn ? 'on' : 'off'}
+      <button
+        type="button"
+        className=""
+        onClick={() => setIsOn((isOn) => !isOn)}
+      >
+        toggle
+      </button>
+    </div>
+  )
+}
+
+export default Root
+
+```
+
+### Root.js
+
+CSS の適用
+
+```
+import React from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Root = () => {
+  const history = useHistory()
+  const { isOn, setIsOn } = useStateContext()
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <p className="font-bold my-1">Root</p>
+      <p onClick={() => history.push('/component-a')}>Go ComponentA</p>
+      on? off?:{isOn ? 'on' : 'off'}
+      <button
+        type="button"
+        className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+        onClick={() => setIsOn((isOn) => !isOn)}
+      >
+        toggle
+      </button>
+    </div>
+  )
+}
+
+export default Root
+```
+
+### ComponentA.js
+
+`Root`へ遷移、toggle の実装
+
+```
+import React from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const ComponentA = () => {
+  const history = useHistory()
+  const { isOn, setIsOn } = useStateContext()
+
+  return (
+    <div className="">
+      <p className="">ComponentA</p>
+      <p onClick={() => history.push('/')}>Go Root</p>
+      on? off?:{isOn ? 'on' : 'off'}
+      <button
+        type="button"
+        className=""
+        onClick={() => setIsOn((isOn) => !isOn)}
+      >
+        toggle
+      </button>
+    </div>
+  )
+}
+
+export default ComponentA
+
+```
+
+### ComponentA.js
+
+CSS の適用
+
+```
+import React from 'react'
+import { useHistory } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const ComponentA = () => {
+  const history = useHistory()
+  const { isOn, setIsOn } = useStateContext()
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <p className="font-bold my-1">ComponentA</p>
+      <p onClick={() => history.push('/')}>Go Root</p>
+      on? off?:{isOn ? 'on' : 'off'}
+      <button
+        type="button"
+        className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+        onClick={() => setIsOn((isOn) => !isOn)}
+      >
+        toggle
+      </button>
+    </div>
+  )
+}
+
+export default ComponentA
 ```
 
 ---
