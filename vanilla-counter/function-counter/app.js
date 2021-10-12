@@ -10,7 +10,7 @@ const viewController = () => {
     element.innerHTML = event ? `<p>${event.detail}</p>` : `<p>0</p>`
   }
 
-  const incrementFunc = (e) => {
+  const incrementFunc = () => {
     count++
     incrementTrigger()
   }
@@ -31,14 +31,14 @@ const viewController = () => {
   }
 
   const mount = () => {
-    render()
+    render(null)
 
-    increment.addEventListener('click', (e) => {
-      incrementOnClick(e)
+    increment.addEventListener('click', () => {
+      incrementOnClick()
     })
 
-    decrement.addEventListener('click', (e) => {
-      decrementOnClick(e)
+    decrement.addEventListener('click', () => {
+      decrementOnClick()
     })
 
     window.addEventListener('count/increment', (e) => {
