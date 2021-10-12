@@ -384,6 +384,9 @@ export default App
 
 ### Login.js
 
+`useStateContext`から context に格納してある`isLogin, setIsLogin`を取得
+`useEffect`内で現在のログイン状況を確認し正しいパスを設定
+
 ```
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
@@ -657,6 +660,8 @@ export default Layout
 ### Modal.js(ログアウトモーダルの実装)
 
 [tailwindui:Modals](https://tailwindui.com/components/application-ui/overlays/modals)を参考に実装
+
+`onClose`句でフォーカス外のクリック時にログアウトをキャンセルした際に`modalOn`をコントロール
 
 ```
 import { Fragment, useRef, useState } from 'react'
