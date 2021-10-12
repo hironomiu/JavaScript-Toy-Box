@@ -29,3 +29,7 @@ react-query の実装サンプル
 ## [react-router-context-sample](./react-router-context-sample)
 
 BrowserRouter,Context を使いグローバルでデータの保持、ログイン、画面遷移、ログアウトの簡単なサンプルアプリ(CSS は Tailwind を利用)
+
+## [vanilla-counter](./vanilla-counter)
+
+vanilla な JavaScript で couter アプリを class,function での実装例
