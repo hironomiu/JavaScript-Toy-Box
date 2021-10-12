@@ -241,6 +241,8 @@ export default Login
 
 ```
 
+### Login.js
+
 `Login.js`に CSS(`tailwind`)を当てていく
 
 ```
@@ -298,6 +300,8 @@ const Login = () => {
 export default Login
 
 ```
+
+### App.js
 
 `App.js`に`Login`を import し`Login`,`Layout`を表示させる
 
