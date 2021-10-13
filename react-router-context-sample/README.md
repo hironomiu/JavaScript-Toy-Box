@@ -659,6 +659,8 @@ export default Layout
 
 ### Modal.js(ログアウトモーダルの実装)
 
+`components/Modal.js`として作成
+
 [tailwindui:Modals](https://tailwindui.com/components/application-ui/overlays/modals)を参考に実装
 
 `onClose`句でフォーカス外のクリック時にログアウトをキャンセルした際に`modalOn`をコントロール
