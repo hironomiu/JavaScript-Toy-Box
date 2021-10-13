@@ -4,7 +4,6 @@ const viewController = () => {
   const element = document.getElementById('app')
   const increment = document.getElementById('increment')
   const decrement = document.getElementById('decrement')
-  const hoge = document.getElementById('hoge')
 
   const render = (event) => {
     element.innerHTML = event ? `<p>${event.detail}</p>` : `<p>0</p>`
