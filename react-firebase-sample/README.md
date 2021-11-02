@@ -266,8 +266,7 @@ const App = () => {
         onChange={(e) => setText((text) => (text = e.target.value))}
       />
       <button onClick={() => pushMessage({ name: name, text: text })}>
-        {" "}
-        push{" "}
+        push
       </button>
     </>
   )
@@ -276,6 +275,10 @@ const App = () => {
 export default App
 
 ```
+
+push button を押下し Realtime Database にデータが反映されていることを確認する
+
+![firebase-web-03a.png](./images/firebase-web-03a.png)
 
 #### メッセージデータの取得(からの表示)
 
@@ -326,8 +329,7 @@ const App = () => {
         onChange={(e) => setText((text) => (text = e.target.value))}
       />
       <button onClick={() => pushMessage({ name: name, text: text })}>
-        {" "}
-        push{" "}
+        push
       </button>
     </>
   )
@@ -351,7 +353,7 @@ $ yarn build
 ✨  Done in 10.65s.
 ```
 
-`build`ディクレトリが作成されていることを確認
+`build`ディクレトリが作成されていることを確認(`ll`は`ls -la`の`alias`)
 
 ```
 $ ll build
@@ -441,7 +443,7 @@ $ yarn add --dev firebase-tools
 ```
 
 $ npx firebase -V
-9.18.0
+9.21.0
 
 ```
 
@@ -511,16 +513,6 @@ but for now we'll just set up a default project.
 xxxxxx (xxxxxx)
 yyyyyy (yyyyyy)
 
-```
-
-リポジトリの選択
-
-```
-Waiting for authentication...
-
-✔  Success! Logged into GitHub as hironomiu
-
-? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) (hironomiu/firebase-react-sample)
 ```
 
 `build`を入力しエンターを押下
@@ -638,7 +630,7 @@ y を押下
 
 ![deploy-05](./images/deploy-05.png)
 
-デプロイが成功したら「Hosting URL」をブラウザで開く
+デプロイ(`npx firebase deploy`)が成功したら「Hosting URL」をブラウザで開く
 
 ```
 
@@ -674,11 +666,11 @@ git commit -m "commited"
 git push origin main
 ```
 
-`yarn build`では GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`- run: yarn build`の前に`- run: yarn add react-scripts`を追記する
+`yarn build`では GitHub Actions がエラーになる場合`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`- run: yarn build`を`- run: yarn install && yarn build` に修正する
 
 ```
-      - run: yarn add react-scripts
-      - run: yarn build
++      - run: yarn install && yarn build
+-      - run: yarn build
 ```
 
 Secrets の設定を`.github/workflows/firebase-hosting-merge.yml`,`.github/workflows/firebase-hosting-pull-request.yml`の`jobs:`の上に以下を追記する
