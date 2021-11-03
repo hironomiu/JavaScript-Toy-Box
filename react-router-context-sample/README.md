@@ -198,12 +198,14 @@ export default App
 
 ```
 import React from 'react'
+import { useStateContext } from '../context/StateProvider'
 
 const Login = () => {
+  const { serviceName } = useStateContext()
   return (
     <div>
       <div className="">
-        <h1 className="">Supre Web Site!!</h1>
+        <h1 className="">{serviceName}!!</h1>
         <h1 className="">Login</h1>
         <div className="">
           <label htmlFor="username" className="">
@@ -230,7 +232,9 @@ const Login = () => {
           <p className="">Please choose a password.</p>
         </div>
         <div className="">
-          <button type="button" className="">Login</button>
+          <button type="button" className="">
+            Login
+          </button>
         </div>
       </div>
     </div>
@@ -270,13 +274,15 @@ export default App
 
 ```
 import React from 'react'
+import { useStateContext } from '../context/StateProvider'
 
 const Login = () => {
+  const { serviceName } = useStateContext()
   return (
     <div>
       <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
         <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
-          Super Web Site!!"
+          {serviceName}!!"
         </h1>
         <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
         <div className="mb-4">
