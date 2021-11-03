@@ -282,7 +282,7 @@ const Login = () => {
     <div>
       <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
         <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
-          {serviceName}!!"
+          {serviceName}!!
         </h1>
         <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
         <div className="mb-4">
