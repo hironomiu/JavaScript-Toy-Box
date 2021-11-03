@@ -241,6 +241,29 @@ export default Login
 
 ```
 
+### App.js
+
+`App.js`に`Login`を import し`Login`,`Layout`を表示させる
+
+```
+import { StateProvider } from './context/StateProvider'
+import Layout from './components/Layout'
+import Login from './components/Login'
+
+const App = () => {
+  return (
+    <div>
+      <StateProvider>
+        <Login />
+        <Layout />
+      </StateProvider>
+    </div>
+  )
+}
+
+export default App
+```
+
 ### Login.js
 
 `Login.js`に CSS(`tailwind`)を当てていく
@@ -299,29 +322,6 @@ const Login = () => {
 
 export default Login
 
-```
-
-### App.js
-
-`App.js`に`Login`を import し`Login`,`Layout`を表示させる
-
-```
-import { StateProvider } from './context/StateProvider'
-import Layout from './components/Layout'
-import Login from './components/Login'
-
-const App = () => {
-  return (
-    <div>
-      <StateProvider>
-        <Login />
-        <Layout />
-      </StateProvider>
-    </div>
-  )
-}
-
-export default App
 ```
 
 ## Step2
