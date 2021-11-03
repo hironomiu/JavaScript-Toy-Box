@@ -557,7 +557,7 @@ export default Login
 
 ### Layout.js（レイアウトの実装１）
 
-一旦 JSX 内のレイアウトを作成する
+一旦 JSX 内のレイアウトを作成する。利用する`Link`コンポーネント、`LogoutIcon`を import する。
 
 ```
 import React, { useEffect } from 'react'
@@ -783,6 +783,8 @@ export default Modal
 ```
 
 ### Layout.js(ログアウトモーダルの実装)
+
+`Modal`コンポーネントを import し、モーダルの表示判定の`modalOn`ステートを作成、`LogoutIcon`をクリックした際にモーダルを表示するよう`onClick`イベントを記載
 
 ```
 import React, { useState, useEffect } from 'react'
@@ -1024,7 +1026,7 @@ export default App
 
 ### Layout.js
 
-`ComponentA`の`Link`に設定し(`to='/component-a'`を追記)、`Root`以外の Location の場合 Top に戻る Link を設定
+`ComponentA`の`Link`に設定し(`to='/component-a'`を追記)、`Root`以外の Location の場合 Top に戻る Link を設定(`useLocation`を利用)
 
 ```
 import React, { useState, useEffect } from 'react'
