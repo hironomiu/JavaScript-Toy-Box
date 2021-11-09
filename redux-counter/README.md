@@ -18,14 +18,14 @@ npm run build
 
 ## memo
 
-インストールした redux パッケージ
+redux
 
 ```
 npm init -y
 npm install redux
 ```
 
-インストールした webpack 関連のパッケージ
+webpack 関連
 
 ```
 npm install --save-dev webpack webpack-cli
@@ -34,4 +34,10 @@ npm install --save-dev clean-webpack-plugin
 npm install --save-dev html-webpack-plugin
 npm install --save-dev terser-webpack-plugin
 npm install --save-dev webpack-dev-server
+```
+
+babel 関連
+
+```
+npm install --save-dev babel-loader @babel/core @babel/preset-env
 ```

@@ -8,6 +8,15 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'js/bundle.[contenthash].js',
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
