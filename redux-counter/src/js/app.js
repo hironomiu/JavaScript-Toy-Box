@@ -23,10 +23,10 @@ const render = () => {
   $element.innerHTML = `<p>${count}</p>`
 }
 
-$incrementButton.addEventListener('click', (e) => {
+$incrementButton.addEventListener('click', () => {
   store.dispatch({ type: COUNT_INCREMENT })
 })
-$decrementButton.addEventListener('click', (e) => {
+$decrementButton.addEventListener('click', () => {
   store.dispatch({ type: COUNT_DECREMENT })
 })
 render()

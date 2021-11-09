@@ -41,3 +41,9 @@ babel 関連
 ```
 npm install --save-dev babel-loader @babel/core @babel/preset-env
 ```
+
+ESlint 関連
+
+```
+npm install --save-dev eslint-loader eslint
+```
