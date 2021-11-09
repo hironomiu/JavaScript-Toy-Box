@@ -47,3 +47,9 @@ ESlint 関連
 ```
 npm install --save-dev eslint-loader eslint
 ```
+
+Prettier 関連
+
+```
+npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+```
