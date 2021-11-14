@@ -48,15 +48,15 @@ class ViewCOntroller {
     this.$element.innerHTML = `<p>${this.model.count}</p>`
   }
 
-  incrementOnClick(event) {
+  incrementOnClick() {
     this.model.increment()
   }
 
-  decrementOnClick(event) {
+  decrementOnClick() {
     this.model.decrement()
   }
 
-  onMessage(event) {
+  onMessage() {
     this.render()
   }
 }
