@@ -4,7 +4,13 @@ const $element = document.getElementById('app')
 
 const render = () => {
   const { count } = store.getState()
-  $element.innerHTML = `<p>${count}</p><button id="decrement_button">decrement</button><button id="increment_button">increment</button>`
+  $element.innerHTML = `
+  <div style="display:flex;justify-content: center;">
+      <button id="decrement_button">decrement</button>
+      <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${count}</p>
+      <button id='increment_button'>increment</button>
+    </div>
+  `
 
   const $incrementButton = document.getElementById('increment_button')
   $incrementButton.addEventListener('click', () => {
