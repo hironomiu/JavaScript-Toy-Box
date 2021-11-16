@@ -27,25 +27,29 @@ class ViewCOntroller {
   constructor() {
     this.model = new Model()
     this.$element = document.getElementById('app')
-    this.$increment = document.getElementById('increment')
-    this.$decrement = document.getElementById('decrement')
   }
 
   mount() {
     this.render()
-    this.$increment.addEventListener('click', (e) => {
-      this.incrementOnClick(e)
-    })
     window.addEventListener('count/increment', (e) => this.onMessage(e))
-
-    this.$decrement.addEventListener('click', (e) => {
-      this.decrementOnClick(e)
-    })
     window.addEventListener('count/decrement', (e) => this.onMessage(e))
   }
 
   render() {
-    this.$element.innerHTML = `<p>${this.model.count}</p>`
+    this.$element.innerHTML = `<p>${this.model.count}</p>
+    <button id="decrement">decrement</button>
+    <button id='increment'>increment</button>
+    `
+    this.$decrement = document.getElementById('decrement')
+    this.$increment = document.getElementById('increment')
+
+    this.$increment.addEventListener('click', (e) => {
+      this.incrementOnClick(e)
+    })
+
+    this.$decrement.addEventListener('click', (e) => {
+      this.decrementOnClick(e)
+    })
   }
 
   incrementOnClick() {
