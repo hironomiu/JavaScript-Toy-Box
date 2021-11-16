@@ -16,6 +16,12 @@ npm start
 npm run build
 ```
 
+## dev
+
+```
+npm run dev
+```
+
 ## memo
 
 redux
