@@ -36,9 +36,12 @@ class ViewCOntroller {
   }
 
   render() {
-    this.$element.innerHTML = `<p>${this.model.count}</p>
-    <button id="decrement">decrement</button>
-    <button id='increment'>increment</button>
+    this.$element.innerHTML = `
+    <div style="display:flex;justify-content: center;">
+      <button id="decrement">decrement</button>
+      <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${this.model.count}</p>
+      <button id='increment'>increment</button>
+    </div>
     `
     this.$decrement = document.getElementById('decrement')
     this.$increment = document.getElementById('increment')
