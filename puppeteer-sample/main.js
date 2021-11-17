@@ -8,22 +8,29 @@ const puppeteer = require('puppeteer')
     await page.type('input[name="q"', 'github hironomiu')
     await page.keyboard.press('Enter')
     await page.waitForSelector('h3 a', {
-      waitUntil: 'networkidle2',
+      waitUntil: 'networkidle1',
       timeout: 2500,
     })
     const aTagAll = await page.$$('a')
-    let tagText = []
-    let indicator = ''
-    console.log(aTagAll.length)
+    let datas = []
     for (let i = 0; i < aTagAll.length; i++) {
-      // console.log(aTagAll[i])
+      datas.push(await (await aTagAll[i].getProperty('href')).jsonValue())
     }
-    // aTagAll[]
-    // await page.waitFor(1500)
+
+    datas = datas.filter((data) =>
+      data.match(/https:\/\/github.com\/hironomiu/g)
+    )
+
+    await page.waitForSelector('h3 a', {
+      waitUntil: 'networkidle2',
+      timeout: 4500,
+    })
+
+    await page.goto(datas[0])
+
     await page.screenshot({ path: './images/image.png' })
   } catch (err) {
-    null
-    // console.log(err)
+    console.log(err)
   }
   await browser.close()
 })()
