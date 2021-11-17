@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer-sample",
+  "version": "1.0.0",
+  "description": "``` npm install puppeteer puppeteer-core ```",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^11.0.0",
+    "puppeteer-core": "^11.0.0"
+  }
+}
