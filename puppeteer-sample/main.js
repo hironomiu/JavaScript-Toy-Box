@@ -20,7 +20,7 @@ const puppeteer = require('puppeteer')
     }
     // aTagAll[]
     // await page.waitFor(1500)
-    await page.screenshot({ path: './image.png' })
+    await page.screenshot({ path: './images/image.png' })
   } catch (err) {
     null
     // console.log(err)
