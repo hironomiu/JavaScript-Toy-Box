@@ -37,6 +37,11 @@ class ViewCOntroller {
 
   render() {
     this.$element.innerHTML = `
+    <header>
+      <div style="display:flex;justify-content: center;">
+        <h1>Vanilla Class Counter App</h1>
+      </div>
+    </header>
     <div style="display:flex;justify-content: center;">
       <button id="decrement">decrement</button>
       <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${this.model.count}</p>
