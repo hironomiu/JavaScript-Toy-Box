@@ -5,11 +5,16 @@ const $element = document.getElementById('app')
 const render = () => {
   const { count } = store.getState()
   $element.innerHTML = `
-  <div style="display:flex;justify-content: center;">
-      <button id="decrement_button">decrement</button>
-      <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${count}</p>
-      <button id='increment_button'>increment</button>
+  <header>
+    <div style="display:flex;justify-content: center;">
+      <h1>Redux Counter App</h1>
     </div>
+  </header>
+  <div style="display:flex;justify-content: center;">
+    <button id="decrement_button">decrement</button>
+    <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${count}</p>
+    <button id='increment_button'>increment</button>
+  </div>
   `
 
   const $incrementButton = document.getElementById('increment_button')
