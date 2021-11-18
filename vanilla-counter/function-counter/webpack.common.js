@@ -8,6 +8,28 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'js/[name].[contenthash].js',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          minChunks: 1,
+        },
+        vendorModules: {
+          chunks: 'initial',
+          test: /src[\\/]js[\\/]modules/,
+          name: 'vendor-modules',
+          minSize: 0,
+          minChunks: 1,
+        },
+        defaultVendors: {
+          filename: 'js/[name].[contenthash].js',
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
