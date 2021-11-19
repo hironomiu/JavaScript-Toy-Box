@@ -29,7 +29,7 @@ const render = () => {
     <button id='increment_button'>increment</button>
   </div>
   <div style="display:flex;justify-content: center;margin-top:10px;">
-    <input style="text-align:center;" type="text" id='input' value=${amount} />
+    <input style="text-align:center;" type="text" id='input' />
     <button id='input_increment_button'>increment</button
   </div>
   `
@@ -46,6 +46,7 @@ const render = () => {
 
   const $input = document.getElementById('input')
   $input.focus()
+  $input.value = amount
   $input.addEventListener('input', updateInput)
 
   const $inputIncrementButton = document.getElementById(

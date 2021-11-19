@@ -20,10 +20,10 @@ const count = (state = 0, action) => {
 
 const amount = (state = 0, action) => {
   switch (action.type) {
-    case AMOUNT_SET:
-      // eslint-disable-next-line no-case-declarations
+    case AMOUNT_SET: {
       const amount = parseInt(action.payload) || 0
       return (state = amount)
+    }
     default:
       return state
   }
