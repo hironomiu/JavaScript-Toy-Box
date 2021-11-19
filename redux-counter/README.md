@@ -60,8 +60,20 @@ npm install --save-dev eslint-loader eslint
 npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
-### css 関連
+### css(sass) 関連
 
 ```
-npm install --save-dev sass-loader node-sass css-loader style-loader
+npm install --save-dev sass-loader node-sass css-loader mini-css-extract-plugin
+```
+
+### css(postcss) 関連
+
+```
+npm install --save-dev postcss-loader autoprefixer
+```
+
+### css(最適化) 関連
+
+```
+npm install --save-dev cssnano
 ```
