@@ -2,7 +2,8 @@ import { createStore, combineReducers } from 'redux'
 
 export const COUNT_INCREMENT = 'count/increment'
 export const COUNT_DECREMENT = 'count/decrement'
-export const COUNT_INPUT_VALUE_INCREMENT = 'count/inputVlueIncrement'
+export const COUNT_INPUT_VALUE_INCREMENT = 'count/inputValueIncrement'
+export const COUNT_INPUT_VALUE_DECREMENT = 'count/inputValueDecrement'
 export const AMOUNT_SET = 'amount/set'
 
 const count = (state = 0, action) => {
@@ -13,6 +14,8 @@ const count = (state = 0, action) => {
       return state - 1
     case COUNT_INPUT_VALUE_INCREMENT:
       return (state += action.payload)
+    case COUNT_INPUT_VALUE_DECREMENT:
+      return (state -= action.payload)
     default:
       return state
   }

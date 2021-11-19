@@ -3,6 +3,7 @@ import {
   COUNT_INCREMENT,
   COUNT_DECREMENT,
   COUNT_INPUT_VALUE_INCREMENT,
+  COUNT_INPUT_VALUE_DECREMENT,
   AMOUNT_SET,
 } from './modules/redux'
 
@@ -25,11 +26,12 @@ const render = () => {
   </header>
   <div style="display:flex;justify-content: center;">
     <button id="decrement_button">decrement</button>
-    <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${count}</p>
+    <p style="font-size:x-large;margin:2px 4px;width:90px;text-align:center">${count}</p>
     <button id='increment_button'>increment</button>
   </div>
   <div style="display:flex;justify-content: center;margin-top:10px;">
-    <input style="text-align:center;" type="text" id='input' />
+    <button id='input_decrement_button'>decrement</button>
+    <input style="font-size:x-large;text-align:center;margin:2px 4px;width:80px;" type="text" id='input' />
     <button id='input_increment_button'>increment</button
   </div>
   `
@@ -44,8 +46,19 @@ const render = () => {
     store.dispatch({ type: COUNT_DECREMENT })
   })
 
+  const $inputDecrementButton = document.getElementById(
+    'input_decrement_button'
+  )
+  $inputDecrementButton.addEventListener('click', () => {
+    store.dispatch({ type: AMOUNT_SET, payload: inputAmount })
+    store.dispatch({
+      type: COUNT_INPUT_VALUE_DECREMENT,
+      payload: parseInt(inputAmount) || 0,
+    })
+  })
+
   const $input = document.getElementById('input')
-  $input.focus()
+  // $input.focus()
   $input.value = amount
   $input.addEventListener('input', updateInput)
 
