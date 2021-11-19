@@ -7,8 +7,9 @@ import {
   AMOUNT_SET,
 } from './modules/redux'
 
+import '../scss/style.scss'
+
 const $element = document.getElementById('app')
-// eslint-disable-next-line no-unused-vars
 
 let inputAmount = 0
 const updateInput = (e) => {
@@ -20,18 +21,18 @@ const render = () => {
   const { count, amount } = store.getState()
   $element.innerHTML = `
   <header>
-    <div style="display:flex;justify-content: center;">
+    <div class="div1">
       <h1>Redux Counter App</h1>
     </div>
   </header>
-  <div style="display:flex;justify-content: center;">
+  <div class="div1">
     <button id="decrement_button">decrement</button>
-    <p style="font-size:x-large;margin:2px 4px;width:90px;text-align:center">${count}</p>
+    <p >${count}</p>
     <button id='increment_button'>increment</button>
   </div>
-  <div style="display:flex;justify-content: center;margin-top:10px;">
+  <div class="div1 div2">
     <button id='input_decrement_button'>decrement</button>
-    <input style="font-size:x-large;text-align:center;margin:2px 4px;width:80px;" type="text" id='input' />
+    <input type="text" id='input' />
     <button id='input_increment_button'>increment</button
   </div>
   `
