@@ -19,7 +19,7 @@ const count = (state = 0, action) => {
   }
 }
 
-const amount = (state = 5, action) => {
+const amount = (state = 0, action) => {
   switch (action.type) {
     case AMOUNT_SET:
       console.log('AMOUNT_SET:', action.payload)

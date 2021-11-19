@@ -16,7 +16,7 @@ const updateInput = (e) => {
 }
 
 const render = () => {
-  const { count } = store.getState()
+  const { count, amount } = store.getState()
   $element.innerHTML = `
   <header>
     <div style="display:flex;justify-content: center;">
@@ -29,7 +29,7 @@ const render = () => {
     <button id='increment_button'>increment</button>
   </div>
   <div style="display:flex;justify-content: center;margin-top:10px;">
-    <input style="text-align:center;" type="text" id='input' value=${inputAmount} />
+    <input style="text-align:center;" type="text" id='input' value=${amount} />
     <button id='input_increment_button'>increment</button
   </div>
   `
