@@ -1,27 +1,5 @@
-class Model {
-  constructor() {
-    this.count = 0
-  }
-
-  increment() {
-    this.count++
-    this.incrementTrigger()
-  }
-
-  decrement() {
-    this.count--
-    this.decrementTrigger()
-  }
-
-  incrementTrigger() {
-    const event = new CustomEvent('count/increment', { detail: this.count })
-    window.dispatchEvent(event)
-  }
-  decrementTrigger() {
-    const event = new CustomEvent('count/decrement', { detail: this.count })
-    window.dispatchEvent(event)
-  }
-}
+import '../scss/style.scss'
+import { Model } from './modules/model'
 
 class ViewCOntroller {
   constructor() {
@@ -35,28 +13,50 @@ class ViewCOntroller {
     window.addEventListener('count/decrement', (e) => this.onMessage(e))
   }
 
+  updateInput(e) {
+    if (e.target.value === '') return
+    this.inputValue = e.target.value
+  }
+
   render() {
     this.$element.innerHTML = `
-    <header>
-      <div style="display:flex;justify-content: center;">
-        <h1>Vanilla Class Counter App</h1>
-      </div>
+    <div class="div1">
+      <h1>Vanilla Class Counter App</h1>
+    </div>
     </header>
-    <div style="display:flex;justify-content: center;">
-      <button id="decrement">decrement</button>
-      <p style="font-size:x-large;margin:2px 4px;width:40px;text-align:center">${this.model.count}</p>
-      <button id='increment'>increment</button>
+    <div class="div1">
+      <button id="decrement_button">decrement</button>
+      <p >${this.model.count}</p>
+      <button id='increment_button'>increment</button>
+    </div>
+    <div class="div1 div2">
+      <button id='input_decrement_button'>decrement</button>
+      <input type="text" id='input' />
+      <button id='input_increment_button'>increment</button
     </div>
     `
-    this.$decrement = document.getElementById('decrement')
-    this.$increment = document.getElementById('increment')
+    this.$decrement = document.getElementById('decrement_button')
+    this.$increment = document.getElementById('increment_button')
+    this.$inputDecrement = document.getElementById('input_decrement_button')
+    this.$inputIncrement = document.getElementById('input_increment_button')
+    this.$input = document.getElementById('input')
+    this.$input.value = this.model.input
+    this.$input.addEventListener('input', this.updateInput)
 
-    this.$increment.addEventListener('click', (e) => {
-      this.incrementOnClick(e)
+    this.$increment.addEventListener('click', () => {
+      this.incrementOnClick()
     })
 
-    this.$decrement.addEventListener('click', (e) => {
-      this.decrementOnClick(e)
+    this.$decrement.addEventListener('click', () => {
+      this.decrementOnClick()
+    })
+
+    this.$inputDecrement.addEventListener('click', () => {
+      this.inputDecrementOnClick()
+    })
+
+    this.$inputIncrement.addEventListener('click', () => {
+      this.inputIncrementOnClick()
     })
   }
 
@@ -66,6 +66,14 @@ class ViewCOntroller {
 
   decrementOnClick() {
     this.model.decrement()
+  }
+
+  inputDecrementOnClick() {
+    this.model.inputDecrement()
+  }
+
+  inputIncrementOnClick() {
+    this.model.inputIncrement()
   }
 
   onMessage() {
