@@ -20,20 +20,20 @@ class ViewCOntroller {
 
   render() {
     this.$element.innerHTML = `
-    <div class="div1">
-      <h1>Vanilla Class Counter App</h1>
-    </div>
-    </header>
-    <div class="div1">
-      <button id="decrement_button">decrement</button>
-      <p >${this.model.count}</p>
-      <button id='increment_button'>increment</button>
-    </div>
-    <div class="div1 div2">
-      <button id='input_decrement_button'>decrement</button>
-      <input type="text" id='input' />
-      <button id='input_increment_button'>increment</button
-    </div>
+      <div class="div1">
+        <h1>Vanilla Class Counter App</h1>
+      </div>
+      </header>
+      <div class="div1">
+        <button id="decrement_button">decrement</button>
+        <p >${this.model.count}</p>
+        <button id='increment_button'>increment</button>
+      </div>
+      <div class="div1 div2">
+        <button id='input_decrement_button'>decrement</button>
+        <input type="text" id='input' />
+        <button id='input_increment_button'>increment</button
+      </div>
     `
     this.$decrement = document.getElementById('decrement_button')
     this.$increment = document.getElementById('increment_button')
@@ -41,7 +41,9 @@ class ViewCOntroller {
     this.$inputIncrement = document.getElementById('input_increment_button')
     this.$input = document.getElementById('input')
     this.$input.value = this.model.input
-    this.$input.addEventListener('input', this.updateInput)
+    this.$input.addEventListener('input', (e) => {
+      this.model.updateInput(parseInt(e.target.value) || 0)
+    })
 
     this.$increment.addEventListener('click', () => {
       this.incrementOnClick()

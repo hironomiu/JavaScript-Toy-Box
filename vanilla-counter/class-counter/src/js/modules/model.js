@@ -5,6 +5,7 @@ export class Model {
   }
 
   updateInput(num) {
+    console.log(num)
     this.input = num
   }
 
