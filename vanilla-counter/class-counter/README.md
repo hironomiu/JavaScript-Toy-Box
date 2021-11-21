@@ -83,5 +83,5 @@ npm install --save-dev cssnano
 ### テスト(Jest) 関連
 
 ```
-npm install --save-dev jest jsdom
+npm install --save-dev jest jsdom eslint-plugin-jest
 ```
