@@ -40,3 +40,7 @@ redux で couter アプリの実装例
 ## [node-twitter](./node-twitter)
 
 標準入力から Tweet をするサンプルアプリ
+
+## [react-redux-toolkit](./react-redux-toolkit)
+
+`create-react-app`のテンプレート`--template redux`を順を追って作成する
