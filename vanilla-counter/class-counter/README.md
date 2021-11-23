@@ -1,5 +1,7 @@
 # class-counter
 
+[TypeScript 版](https://github.com/hironomiu/vanilla-counter-class-typescript)
+
 ## run
 
 ```
