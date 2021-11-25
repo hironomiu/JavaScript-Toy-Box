@@ -1,6 +1,8 @@
 # react-redux-toolkit
 
-`create-react-app`のテンプレート`--template redux`を順を追って作成する
+`create-react-app`のテンプレート`--template redux`のカウンターアプリ(上段)と同じものを順を追って下段に追加作成する
+
+![demo](./demo.gif)
 
 ## SetUp
 
