@@ -67,7 +67,7 @@ const Counter2 = () => {
   return (
     <div>
       <button>-</button>
-      <input type="text" />
+      <span>0</span>
       <button>+</button>
     </div>
   )
@@ -76,7 +76,7 @@ const Counter2 = () => {
 export default Counter2
 ```
 
-`src/features/counter2`配下に`counter2Slice.js`を作成
+`src/features/counter2`配下に`counter2Slice.js`を作成(減算`decrement`,加算`increment`を reducers に配置,`selectCount`で`value`を参照できるよう import)
 
 ```
 import { createSlice } from '@reduxjs/toolkit'
@@ -90,11 +90,11 @@ export const couter2Slice = createSlice({
   name: 'counter2',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
     decrement: (state) => {
       state.value -= 1
+    },
+    increment: (state) => {
+      state.value += 1
     },
   },
 })
@@ -106,7 +106,7 @@ export const selectCount = (state) => state.counter2.value
 export default couter2Slice.reducer
 ```
 
-`src/app/store.js`に作成した redux を追加
+`src/app/store.js`に作成した redux を `counter2: counter2Reducer`で追加
 
 ```
 import { configureStore } from '@reduxjs/toolkit'
@@ -207,7 +207,7 @@ const Counter2 = () => {
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
         <button className={styles.button}>Add Amount</button>
-        <button className={styles.button}>Add Async</button>
+        <button className={styles.asyncButton}>Add Async</button>
         <button className={styles.button}>Add If Odd</button>
       </div>
     </div>
@@ -294,7 +294,7 @@ const Counter2 = () => {
         >
           Add Amount
         </button>
-        <button className={styles.button}>Add Async</button>
+        <button className={styles.asyncButton}>Add Async</button>
         <button className={styles.button}>Add If Odd</button>
       </div>
     </div>
