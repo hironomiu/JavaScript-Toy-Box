@@ -96,7 +96,7 @@ npx tailwindcss init -p
 
 モーダル用のパッケージのインストール
 
-`@headlessui/react`
+[`@headlessui/react`](https://www.npmjs.com/package/@headlessui/react)
 
 ```
 yarn add @headlessui/react
@@ -106,7 +106,7 @@ yarn add @headlessui/react
 
 アイコン用のパッケージのインストール
 
-`@heroicons/react`
+[`@heroicons/react`](https://www.npmjs.com/package/@heroicons/react)
 
 ```
 yarn add @heroicons/react
@@ -140,6 +140,10 @@ export default App
 
 `src`配下に`context`ディレクトリを作成する
 
+```
+mkdir -p ./src/context
+```
+
 `src/context`配下に`StateProvider.js`を作成し`serviceName`を定義した以下を記述する
 
 ```
@@ -163,6 +167,10 @@ export const useStateContext = () => useContext(StateContext)
 ### Layout.js の作成
 
 `src`配下に`components`ディレクトリを作成する
+
+```
+mkdir -p ./src/components
+```
 
 `src/components`配下に`Layout.js`を作成し`context`で定義した`serviceName`を表示する以下を記述する
 
@@ -370,7 +378,37 @@ export const useStateContext = () => useContext(StateContext)
 
 ### App.js
 
-`BrowserRouter, Route, Switch`を import しレイアウトを整える(一旦`Layout`を表示)
+#### react-router-dom v6
+
+`react-router-dom`が v6 の場合`BrowserRouter, Routes,Route`を import しレイアウトを整える(一旦`Layout`を表示)
+
+```
+import { StateProvider } from './context/StateProvider'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './components/Login'
+
+const App = () => {
+  return (
+    <div>
+      <StateProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Layout />} />
+          </Routes>
+        </BrowserRouter>
+      </StateProvider>
+    </div>
+  )
+}
+
+export default App
+```
+
+#### react-router-dom v5
+
+`react-router-dom`が v5 の場合`BrowserRouter, Route, Switch`を import しレイアウトを整える(一旦`Layout`を表示)
 
 ```
 import React from 'react'
