@@ -450,11 +450,11 @@ import { useStateContext } from '../context/StateProvider'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const { serviceName, isLogin, setIsLogin } = useStateContext()
+  const { serviceName, isLogin } = useStateContext()
   const navigate = useNavigate()
   useEffect(() => {
     if (isLogin) navigate('/')
-  }, [])
+  }, [isLogin, navigate])
 
   return (
     <div>
@@ -521,13 +521,13 @@ import { useStateContext } from '../context/StateProvider'
 
 const Login = () => {
   const history = useHistory()
-  const { serviceName,isLogin, setIsLogin } = useStateContext()
+  const { serviceName,isLogin } = useStateContext()
 
   useEffect(() => {
     if (isLogin) {
       history.push('/')
     }
-  })
+  },[isLogin,history])
   return (
     <div>
       <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
@@ -581,6 +581,29 @@ export default Login
 
 ### Layout.js
 
+#### v6
+
+ログイン判定を実装し`/login`が表示されること
+
+```
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+
+const Layout = () => {
+  const { serviceName, isLogin } = useStateContext()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!isLogin) navigate('/login')
+  }, [isLogin, navigate])
+  return <div>{serviceName}</div>
+}
+
+export default Layout
+```
+
+#### v5
+
 ログイン判定を実装し`/login`が表示されること
 
 ```
@@ -593,7 +616,7 @@ const Layout = ({ children }) => {
   const history = useHistory()
   useEffect(() => {
     if (!isLogin) history.push('/login')
-  })
+  },[isLogin,history])
 
   return <div>{serviceName}</div>
 }
