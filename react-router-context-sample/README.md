@@ -777,6 +777,184 @@ const Login = () => {
 export default Login
 ```
 
+### v6
+
+v6 は以降を進める
+
+#### Root.js の仮実装
+
+`./src/components`配下に`Root.js`を仮で実装する
+
+```
+import React from 'react'
+
+const Root = () => {
+  return <div>Root</div>
+}
+
+export default Root
+```
+
+#### ComponentA.js の仮実装
+
+`./src/components`配下に`ComponentA.js`を仮で実装する
+
+```
+import React from 'react'
+
+const ComponentA = () => {
+  return <div>ComponentA</div>
+}
+
+export default ComponentA
+```
+
+#### App.js
+
+`Layout`に children として`Root`,`ComponentA`を設定する
+
+```
+import { StateProvider } from './context/StateProvider'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './components/Login'
+import Root from './components/Root'
+import ComponentA from './components/ComponentA'
+
+const App = () => {
+  return (
+    <div>
+      <StateProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Root />} />
+              <Route path="/component-a" element={<ComponentA />}></Route>
+            </Route>
+          </Routes>
+        </Router>
+      </StateProvider>
+    </div>
+  )
+}
+
+export default App
+```
+
+#### Layout.js を仮で実装
+
+```
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+import { Link, Outlet } from 'react-router-dom'
+import { LogoutIcon } from '@heroicons/react/outline'
+const Layout = ({ children }) => {
+  const { serviceName, isLogin } = useStateContext()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!isLogin) navigate('/login')
+  }, [isLogin, navigate])
+
+  return (
+    <div className="">
+      <header className="">
+        <nav className="">
+          <div className="">
+            <div className="">
+              <span className="">{serviceName}!!</span>
+              <Link className="" to="">
+                Root
+              </Link>
+              <Link className="" to="">
+                ComponentA
+              </Link>
+            </div>
+            <div className="">
+              <LogoutIcon className="" />
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <Outlet />
+      </main>
+      <footer className="">
+        <div className="">
+          <p className="">{serviceName}@2021</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default Layout
+```
+
+#### Layout.js(CSS の適用、ルーティングパスの設定)
+
+```
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import { useStateContext } from '../context/StateProvider'
+import { Link, Outlet } from 'react-router-dom'
+import { LogoutIcon } from '@heroicons/react/outline'
+const Layout = ({ children }) => {
+  const { serviceName, isLogin } = useStateContext()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!isLogin) navigate('/login')
+  }, [isLogin, navigate])
+
+  return (
+    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
+      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
+        <nav className="bg-gray-600 w-screen">
+          <div className="flex justify-between">
+            <div className="">
+              <span className="font-semibold text-xl tracking-tight text-white">
+                {serviceName}!!
+              </span>
+              <Link
+                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
+                to="/"
+              >
+                Root
+              </Link>
+              <Link
+                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
+                to="/component-a"
+              >
+                ComponentA
+              </Link>
+            </div>
+            <div className="">
+              <LogoutIcon className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded" />
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <Outlet />
+      </main>
+      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
+        <div className="flex justify-center items-center">
+          <p className="pt-3">{serviceName}@2021</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default Layout
+
+```
+
+### v5
+
+v5 は以降を進める
+
 ### Layout.js（レイアウトの実装１）
 
 一旦 JSX 内のレイアウトを作成する。利用する`Link`コンポーネント、`LogoutIcon`を import する。
