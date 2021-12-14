@@ -850,7 +850,7 @@ import { useNavigate } from 'react-router'
 import { useStateContext } from '../context/StateProvider'
 import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
   const navigate = useNavigate()
   useEffect(() => {
@@ -900,7 +900,7 @@ import { useNavigate } from 'react-router'
 import { useStateContext } from '../context/StateProvider'
 import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
   const navigate = useNavigate()
   useEffect(() => {
@@ -1082,7 +1082,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useState(false)
