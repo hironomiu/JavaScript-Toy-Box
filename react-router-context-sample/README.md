@@ -1367,6 +1367,77 @@ export default Layout
 
 ```
 
+#### Routes への切り出し
+
+`./src`配下に`Routes`ディレクトリを作成する。
+
+```
+mkdir -p ./src/Routes
+```
+
+`index.js`の作成
+
+```
+import ComponentA from '../components/ComponentA'
+import Layout from '../components/Layout'
+import Login from '../components/Login'
+import Root from '../components/Root'
+
+export const routePath = [
+  { path: '/login', element: <Login /> },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Root />,
+      },
+      {
+        path: '/component-a',
+        element: <ComponentA />,
+      },
+    ],
+  },
+]
+```
+
+#### ./src/index.js
+
+`BrowserRouter`でラップする
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+```
+
+#### App.js
+
+```
+import { StateProvider } from './context/StateProvider'
+import { useRoutes } from 'react-router-dom'
+import { routePath } from './Routes'
+
+const App = () => {
+  const element = useRoutes(routePath)
+  return <StateProvider>{element}</StateProvider>
+}
+
+export default App
+```
+
 ### v5
 
 v5 は以降を進める
