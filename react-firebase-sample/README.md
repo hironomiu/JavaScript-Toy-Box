@@ -106,6 +106,8 @@ $ cd firebase-react-sample
 $ npx create-react-app .
 ```
 
+注意：`npx create-react-app .`がエラーになる場合、`yarn create react-app .`で React APP を作成します
+
 一時的に退避したファイルを`.env.local`として作成しクリップボードにコピーした内容をペーストする(除外指定されていない場合は後ほど.gitignore に指定すること)
 
 #### React アプリの起動
