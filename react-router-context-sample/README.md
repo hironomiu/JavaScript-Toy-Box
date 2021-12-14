@@ -1266,7 +1266,7 @@ export default ComponentA
 
 #### ComponentA.js
 
-CSS を適用します。
+CSS を適用する。
 
 ```
 import { useNavigate } from 'react-router-dom'
@@ -1369,12 +1369,12 @@ export default Layout
 
 ```
 
-#### Routes への切り出し
+#### routes への切り出し
 
-`./src`配下に`Routes`ディレクトリを作成する。
+`./src`配下に`routes`ディレクトリを作成する。
 
 ```
-mkdir -p ./src/Routes
+mkdir -p ./src/routes
 ```
 
 `index.js`の作成
@@ -1430,7 +1430,7 @@ ReactDOM.render(
 ```
 import { StateProvider } from './context/StateProvider'
 import { useRoutes } from 'react-router-dom'
-import { routePath } from './Routes'
+import { routePath } from './routes'
 
 const App = () => {
   const element = useRoutes(routePath)
@@ -1439,6 +1439,8 @@ const App = () => {
 
 export default App
 ```
+
+v6 はここまでで終了。
 
 ### v5
 
