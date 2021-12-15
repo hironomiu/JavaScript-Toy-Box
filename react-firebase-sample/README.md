@@ -108,7 +108,9 @@ $ npx create-react-app .
 
 注意：`npx create-react-app .`がエラーになる場合、`yarn create react-app .`で React APP を作成します
 
-一時的に退避したファイルを`.env.local`として作成しクリップボードにコピーした内容をペーストする(除外指定されていない場合は後ほど.gitignore に指定すること)
+#### .env.local
+
+一時的に退避したファイルをプロジェクト直下に`.env.local`として作成しクリップボードにコピーした内容をペーストする(除外指定されていない場合は後ほど.gitignore に指定すること)
 
 #### React アプリの起動
 
@@ -177,15 +179,7 @@ $ yarn start
 
 #### `.evn.local`の移動
 
-事前に作成した[`.evn.local`](./sample/.env.local)を`app`直下に配置する(sample は設定値は空のため適時埋めること)
-
-```
-$ vi .env.local
-```
-
-#### `.env.local`の編集
-
-`firebase.js`から`process.env`で取得するため以下の内容に修正する(シングルクォートの中は取得した値を記述する)
+事前に作成した`.env.local`を[サンプル `.evn.local`](./sample/.env.local)のフォーマットに修正する
 
 ```
 REACT_APP_FIREBASE_API_KEY=''
