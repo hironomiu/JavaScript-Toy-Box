@@ -243,7 +243,7 @@ $ yarn start
 `App.js`を以下に修正(空文字対応、エンター受付(全角、半角)、フォーカス固定などは行っていない)
 
 ```
-import React, { useState } from "react"
+import { useState } from "react"
 import { pushMessage } from "../firebase"
 
 const App = () => {
@@ -269,7 +269,39 @@ const App = () => {
 }
 
 export default App
+```
 
+別な書き方
+
+```
+import { useState } from 'react'
+import { pushMessage } from '../firebase'
+
+const App = () => {
+  const [data, setData] = useState({ name: 'default', text: 'text' })
+
+  const setNameFunc = (e) => {
+    setData((prevData) => ({ ...prevData, name: e.target.value }))
+  }
+
+  const setTextFunc = (e) => {
+    setData((prevData) => ({ ...prevData, text: e.target.value }))
+  }
+
+  const pushMessageToFirebase = () => {
+    pushMessage({ ...data })
+  }
+
+  return (
+    <>
+      <input type="text" value={data.name} onChange={(e) => setNameFunc(e)} />
+      <input type="text" value={data.text} onChange={(e) => setTextFunc(e)} />
+      <button onClick={() => pushMessageToFirebase()}>push</button>
+    </>
+  )
+}
+
+export default App
 ```
 
 push button を押下し Realtime Database にデータが反映されていることを確認する
@@ -283,7 +315,7 @@ push button を押下し Realtime Database にデータが反映されている�
 [公式:listen_for_value_events](https://firebase.google.com/docs/database/web/read-and-write#listen_for_value_events)
 
 ```
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { messagesRef, pushMessage } from "../firebase"
 
 const App = () => {
