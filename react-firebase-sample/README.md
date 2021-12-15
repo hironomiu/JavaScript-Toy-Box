@@ -371,6 +371,7 @@ export default App
 ```
 import { useState, useEffect } from 'react'
 import { messagesRef, pushMessage } from '../firebase'
+import Message from './Message'
 
 const App = () => {
   const [data, setData] = useState({ name: 'default', text: 'text' })
@@ -411,9 +412,7 @@ const App = () => {
   return (
     <>
       {messages.map((message) => (
-        <div key={message.key}>
-          {message.name}:{message.text}
-        </div>
+        <Message key={message.key} message={message} />
       ))}
       <input type="text" value={data.name} onChange={(e) => setNameFunc(e)} />
       <input type="text" value={data.text} onChange={(e) => setTextFunc(e)} />
@@ -423,6 +422,22 @@ const App = () => {
 }
 
 export default App
+```
+
+`./src/components/Message.js`
+
+```
+import { memo } from 'react'
+
+const Message = memo(({ message }) => {
+  return (
+    <div>
+      {message.name}:{message.text}
+    </div>
+  )
+})
+
+export default Message
 ```
 
 ### 確認
