@@ -740,6 +740,19 @@ have a build process for your assets, use your build's output directory.
 
 ? Set up automatic builds and deploys with GitHub? Yes
 
+
+```
+
+「n」を押下
+
+```
+
+? File build/index.html already exists. Overwrite? No
+i Skipping write of build/index.html
+i Writing configuration info to firebase.json...
+i Writing project information to .firebaserc...
+✔ Firebase initialization complete!
+
 ```
 
 `Firebase CLI GitHub Login Successful` が表示されること
