@@ -742,23 +742,11 @@ have a build process for your assets, use your build's output directory.
 
 ```
 
-「n」を押下
-
-```
-
-? File build/index.html already exists. Overwrite? No
-i Skipping write of build/index.html
-i Writing configuration info to firebase.json...
-i Writing project information to .firebaserc...
-✔ Firebase initialization complete!
-
-```
-
 `Firebase CLI GitHub Login Successful` が表示されること
 
 ![deploy-04b](./images/deploy-04b.png)
 
-エンターを押下
+対象のリポジトリを指定していることを確認しエンターを押下
 
 ```
 ? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) hironomiu/firebase-react-sample
