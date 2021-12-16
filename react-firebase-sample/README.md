@@ -440,7 +440,7 @@ const Message = memo(({ message }) => {
 export default Message
 ```
 
-更に別な書き方
+更に別な書き方(Custom Hooks)
 
 `./src/components/App.js`
 
