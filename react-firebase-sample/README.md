@@ -440,6 +440,97 @@ const Message = memo(({ message }) => {
 export default Message
 ```
 
+更に別な書き方
+
+`./src/components/App.js`
+
+```
+import Message from './Message'
+import useHooks from '../hooks/appHooks'
+
+const App = () => {
+  const { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data } =
+    useHooks()
+
+  return (
+    <>
+      {messages.map((message) => (
+        <Message key={message.key} message={message} />
+      ))}
+      <input type="text" value={data.name} onChange={(e) => setNameFunc(e)} />
+      <input type="text" value={data.text} onChange={(e) => setTextFunc(e)} />
+      <button onClick={() => pushMessageToFirebase()}>push</button>
+    </>
+  )
+}
+
+export default App
+```
+
+`./src/components/Message.js`(変更なし)
+
+```
+import { memo } from 'react'
+
+const Message = memo(({ message }) => {
+  return (
+    <div>
+      {message.name}:{message.text}
+    </div>
+  )
+})
+
+export default Message
+```
+
+`.src/hooks/appHooks.js`
+
+```
+import { useState, useEffect } from 'react'
+import { messagesRef, pushMessage } from '../firebase'
+
+const useHooks = () => {
+  const [data, setData] = useState({ name: 'default', text: 'text' })
+  const [messages, setMessages] = useState([])
+
+  const setNameFunc = (e) => {
+    setData((prevData) => ({ ...prevData, name: e.target.value }))
+  }
+
+  const setTextFunc = (e) => {
+    setData((prevData) => ({ ...prevData, text: e.target.value }))
+  }
+
+  const pushMessageToFirebase = () => {
+    pushMessage({ ...data })
+  }
+
+  const setMessageFunc = (newMessage) => {
+    setMessages((prevNewMessages) => (prevNewMessages = [...newMessage]))
+  }
+
+  useEffect(() => {
+    messagesRef
+      .orderByKey()
+      .limitToLast(3)
+      .on('value', (snapshot) => {
+        const messages = snapshot.val()
+        if (!messages) return
+        const entries = Object.entries(messages)
+        const newMessage = entries.map((data) => {
+          const [key, message] = data
+          return { key, ...message }
+        })
+        setMessageFunc(newMessage)
+      })
+  }, [])
+
+  return { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data }
+}
+
+export default useHooks
+```
+
 ### 確認
 
 Chrome DevTools を開き`Sources`->`localhost:3000`を右クリックし API キー(`REACT_APP_FIREBASE_API_KEY`)で検索してみましょう
