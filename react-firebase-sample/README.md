@@ -486,28 +486,34 @@ export default Message
 `.src/hooks/appHooks.js`
 
 ```
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { messagesRef, pushMessage } from '../firebase'
 
 const useHooks = () => {
   const [data, setData] = useState({ name: 'default', text: 'text' })
   const [messages, setMessages] = useState([])
 
-  const setNameFunc = (e) => {
-    setData((prevData) => ({ ...prevData, name: e.target.value }))
-  }
+  const setNameFunc = useCallback(
+    (e) => {
+      setData((prevData) => ({ ...prevData, name: e.target.value }))
+    },
+    [setData]
+  )
 
-  const setTextFunc = (e) => {
-    setData((prevData) => ({ ...prevData, text: e.target.value }))
-  }
+  const setTextFunc = useCallback(
+    (e) => {
+      setData((prevData) => ({ ...prevData, text: e.target.value }))
+    },
+    [setData]
+  )
 
-  const pushMessageToFirebase = () => {
+  const pushMessageToFirebase = useCallback(() => {
     pushMessage({ ...data })
-  }
+  }, [data])
 
-  const setMessageFunc = (newMessage) => {
+  const setMessageFunc = useCallback((newMessage) => {
     setMessages((prevNewMessages) => (prevNewMessages = [...newMessage]))
-  }
+  }, [])
 
   useEffect(() => {
     messagesRef
@@ -523,7 +529,7 @@ const useHooks = () => {
         })
         setMessageFunc(newMessage)
       })
-  }, [])
+  }, [setMessageFunc])
 
   return { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data }
 }
