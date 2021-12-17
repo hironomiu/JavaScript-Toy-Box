@@ -21,52 +21,22 @@ mkdir react-router-context-sample
 cd react-router-context-sample
 ```
 
-`create-react-app`と必要なパッケージのインストール
+`create-react-app`と必要なパッケージのインストール(`npx create-react-app .`がエラーになる場合は`yarn create react-app .`で行う)
 
 ```
 npx create-react-app .
 yarn add react-router-dom
-yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-yarn add @craco/craco
 ```
 
-`package.json`の script を`craco`で構成する
+### tailwind install & init
 
-before
+[tailwind 公式 create-react-app](https://tailwindcss.com/docs/guides/create-react-app)
 
-```
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-```
-
-after(`eject`は削除)
+tailwind のインストール
 
 ```
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+yarn add -D tailwindcss postcss autoprefixer
 ```
-
-`craco.config.js`を作成（`touch`ではなく VSCode からファイル作成でも良い）
-
-```
-touch craco.config.js
-```
-
-作成した`craco.config.js`に以下を記述
-
-```
-module.exports = {
-  style: {
-    postcss: {
-      plugins: [require('tailwindcss'), require('autoprefixer')],
-    },
-  },
-}
-```
-
-### tailwind init
 
 tailwind の初期化
 
@@ -74,13 +44,16 @@ tailwind の初期化
 npx tailwindcss init -p
 ```
 
-`tailwind.config.js`の`purge`を修正
+`tailwind.config.js`を修正
 
 ```
-
-- purge: [],
-
-+ purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
 
 ```
 
