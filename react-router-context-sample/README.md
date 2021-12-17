@@ -469,79 +469,7 @@ const Login = () => {
 export default Login
 ```
 
-#### v5
-
-`useStateContext`から context に格納してある`isLogin, setIsLogin`を取得
-`useEffect`内で現在のログイン状況を確認し正しいパスを`useHistory`で設定
-
-```
-import { useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-
-const Login = () => {
-  const history = useHistory()
-  const { serviceName,isLogin } = useStateContext()
-
-  useEffect(() => {
-    if (isLogin) {
-      history.push('/')
-    }
-  },[isLogin,history])
-  return (
-    <div>
-      <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
-        <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
-          {serviceName}
-        </h1>
-        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
-        <div className="mb-4">
-          <label
-            htmlFor="username"
-            className="block text-grey-darker pt-2 text-sm font-bold mb-2"
-          >
-            username
-          </label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            autoFocus={true}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-grey-darker text-sm pt-2 font-bold mb-2"
-          >
-            username
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="******************"
-            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-          />
-          <p className="text-red text-xs italic">Please choose a password.</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            type="button"
-            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-          >Login</button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default Login
-```
-
 ### Layout.js
-
-#### v6
 
 ログイン判定を実装し`/login`が表示されること
 
@@ -562,31 +490,7 @@ const Layout = () => {
 export default Layout
 ```
 
-#### v5
-
-ログイン判定を実装し`/login`が表示されること
-
-```
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-
-const Layout = ({ children }) => {
-  const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  useEffect(() => {
-    if (!isLogin) history.push('/login')
-  },[isLogin,history])
-
-  return <div>{serviceName}</div>
-}
-
-export default Layout
-```
-
 ### Login.js(ログイン処理の実装)
-
-#### v6
 
 `button`タグに`onClick`イベント処理を追記し`Login`ボタン押下後`/`に遷移すること
 
@@ -649,81 +553,6 @@ const Login = () => {
             className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               login()
-            }}
-          >
-            Login
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default Login
-```
-
-#### v5
-
-`button`タグに`onClick`イベント処理を追記し`Login`ボタン押下後`/`に遷移すること
-
-```
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-
-const Login = () => {
-  const history = useHistory()
-  const { servicename,isLogin, setIsLogin } = useStateContext()
-
-  useEffect(() => {
-    if (isLogin) {
-      history.push('/')
-    }
-  })
-  return (
-    <div>
-      <div className="flex bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-col font-mono">
-        <h1 className="bg-white pt-10 pb-8 font-bold rounded text-3xl">
-          {servicename}
-        </h1>
-        <h1 className="bg-white pt-6 pb-4 font-bold rounded text-xl">Login</h1>
-        <div className="mb-4">
-          <label
-            htmlFor="username"
-            className="block text-grey-darker pt-2 text-sm font-bold mb-2"
-          >
-            username
-          </label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            autoFocus={true}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-grey-darker text-sm pt-2 font-bold mb-2"
-          >
-            username
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="******************"
-            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-          />
-          <p className="text-red text-xs italic">Please choose a password.</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            type="button"
-            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              setIsLogin(true)
-              history.push('/')
             }}
           >
             Login
