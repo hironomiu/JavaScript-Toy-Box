@@ -351,70 +351,55 @@ export const StateProvider = ({ children }) => {
 export const useStateContext = () => useContext(StateContext)
 ```
 
-### App.js
+### index.js
 
-#### react-router-dom v6
-
-`react-router-dom`が v6 の場合`BrowserRouter, Routes,Route`を import しレイアウトを整える(一旦`Layout`を表示)
-
-```
-import { StateProvider } from './context/StateProvider'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout'
-import Login from './components/Login'
-
-const App = () => {
-  return (
-    <div>
-      <StateProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Layout />} />
-          </Routes>
-        </BrowserRouter>
-      </StateProvider>
-    </div>
-  )
-}
-
-export default App
-```
-
-#### react-router-dom v5
-
-`react-router-dom`が v5 の場合`BrowserRouter, Route, Switch`を import しレイアウトを整える(一旦`Layout`を表示)
+`BrowserRouter`で`<App/>`をラップする
 
 ```
 import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
 import { StateProvider } from './context/StateProvider'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+ReactDOM.render(
+  <React.StrictMode>
+    <StateProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StateProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+```
+
+### App.js
+
+`Routes,Route`を import しレイアウトを整える(一旦`Layout`を表示)
+
+```
+import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Login from './components/Login'
 
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-        <StateProvider>
-          <Switch>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Layout></Layout>
-          </Switch>
-        </StateProvider>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Layout />} />
+      </Routes>
     </div>
   )
 }
 
 export default App
+
 ```
 
 ### Login.js
-
-#### v6
 
 `useStateContext`から context に格納してある`isLogin, setIsLogin`を取得
 `useEffect`内で現在のログイン状況を確認し正しいパスを`useNavigate`で設定
