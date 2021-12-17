@@ -566,11 +566,7 @@ const Login = () => {
 export default Login
 ```
 
-### v6
-
-v6 は以降を進める
-
-#### Root.js の仮実装
+### Root.js の仮実装
 
 `./src/components`配下に`Root.js`を仮で実装する
 
@@ -584,7 +580,7 @@ const Root = () => {
 export default Root
 ```
 
-#### ComponentA.js の仮実装
+### ComponentA.js の仮実装
 
 `./src/components`配下に`ComponentA.js`を仮で実装する
 
@@ -598,13 +594,13 @@ const ComponentA = () => {
 export default ComponentA
 ```
 
-#### App.js
+### App.js
 
 `Layout`に children として`Root`,`ComponentA`を設定する
 
 ```
 import { StateProvider } from './context/StateProvider'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Login from './components/Login'
 import Root from './components/Root'
@@ -614,15 +610,13 @@ const App = () => {
   return (
     <div>
       <StateProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Layout />}>
-              <Route path="/" element={<Root />} />
-              <Route path="/component-a" element={<ComponentA />}></Route>
-            </Route>
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Root />} />
+            <Route path="/component-a" element={<ComponentA />}></Route>
+          </Route>
+        </Routes>
       </StateProvider>
     </div>
   )
@@ -631,7 +625,7 @@ const App = () => {
 export default App
 ```
 
-#### Layout.js を仮で実装
+#### Layout.js を仮で実装(CSS 未適用)
 
 ```
 import { useEffect } from 'react'
@@ -681,7 +675,7 @@ const Layout = () => {
 export default Layout
 ```
 
-#### Layout.js(CSS の適用、ルーティングパスの設定)
+### Layout.js(CSS の適用、ルーティングパスの設定)
 
 ```
 import { useEffect } from 'react'
@@ -740,610 +734,9 @@ export default Layout
 
 ```
 
-#### Modal.js(ログアウトモーダルの実装)
-
-`./src/components/Modal.js`を作成
-
-[tailwindui:Modals](https://tailwindui.com/components/application-ui/overlays/modals)を参考に実装
-
-`onClose`句でフォーカス外のクリック時にログアウトをキャンセルした際に`modalOn`をコントロール
-
-```
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { LogoutIcon } from '@heroicons/react/outline'
-import { useStateContext } from '../context/StateProvider'
-
-const Modal = ({ setModalOn }) => {
-  const [open, setOpen] = useState(true)
-  const { setIsLogin } = useStateContext()
-  const cancelButtonRef = useRef(null)
-
-  return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog
-        as="div"
-        className="fixed z-10 inset-0 overflow-y-auto font-mono"
-        initialFocus={cancelButtonRef}
-        onClose={() => {
-          setOpen(false)
-          setModalOn(false)
-        }}
-      >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          {/* This element is to trick the browser into centering the modal contents. */}
-          <span
-            className="hidden sm:inline-block sm:align-middle sm:h-screen"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <LogoutIcon
-                      className="h-6 w-6 text-gray-600"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-lg leading-6 font-medium text-gray-900"
-                    >
-                      Logout account
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        ログアウトしますか？
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-500 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {
-                    setOpen(false)
-                    setModalOn(false)
-                    setIsLogin(false)
-                  }}
-                >
-                  Logout
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {
-                    setOpen(false)
-                    setModalOn(false)
-                  }}
-                  ref={cancelButtonRef}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </Transition.Child>
-        </div>
-      </Dialog>
-    </Transition.Root>
-  )
-}
-
-export default Modal
-
-```
-
-#### Layout.js(ログアウトモーダルの実装)
-
-`Modal`コンポーネントを import し、モーダルの表示判定の`modalOn`ステートを作成、`LogoutIcon`をクリックした際にモーダルを表示するよう`onClick`イベントを記載
-
-```
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-import { Link, Outlet } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-import Modal from './Modal'
-
-const Layout = () => {
-  const { serviceName, isLogin } = useStateContext()
-  const navigate = useNavigate()
-  const [modalOn, setModalOn] = useState(false)
-
-  useEffect(() => {
-    if (!isLogin) navigate('/login')
-  }, [isLogin, navigate])
-
-  return (
-    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
-      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
-        <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
-              </span>
-              <Link
-                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
-                to="/"
-              >
-                Root
-              </Link>
-              <Link
-                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
-                to="/component-a"
-              >
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon
-                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
-                aria-hidden="true"
-                onClick={() => {
-                  setModalOn(true)
-                }}
-              />
-            </div>
-            {modalOn ? <Modal setModalOn={setModalOn} /> : null}
-          </div>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-```
-
-ゴール：Root,ComponentA の中を実装する
-
-#### StateProvider.js
-
-`isOn,SetIsOn`の定義
-
-```
-import { createContext, useContext, useState } from 'react'
-
-const StateContext = createContext({})
-
-export const StateProvider = ({ children }) => {
-  const serviceName = 'Super Web Site'
-  const [isLogin, setIsLogin] = useState(false)
-  const [isOn, setIsOn] = useState(false)
-
-  return (
-    <StateContext.Provider
-      value={{ serviceName, isLogin, setIsLogin, isOn, setIsOn }}
-    >
-      {children}
-    </StateContext.Provider>
-  )
-}
-
-export const useStateContext = () => useContext(StateContext)
-```
-
-#### Root.js(CSS 未適用)
-
-`ComponentA`へ遷移、toggle の実装
-
-```
-import React from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-
-const Root = () => {
-  const history = useHistory()
-  const { isOn, setIsOn } = useStateContext()
-
-  return (
-    <div className="">
-      <p className="">Root</p>
-      <p onClick={() => history.push('/component-a')}>Go ComponentA</p>
-      on? off?:{isOn ? 'on' : 'off'}
-      <button
-        type="button"
-        className=""
-        onClick={() => setIsOn((isOn) => !isOn)}
-      >
-        toggle
-      </button>
-    </div>
-  )
-}
-
-export default Root
-```
-
-#### Root.js(CSS 適用)
-
-CSS を適用する
-
-```
-import { useNavigate } from 'react-router-dom'
-import { useStateContext } from '../context/StateProvider'
-
-const Root = () => {
-  const navigate = useNavigate()
-  const { isOn, setIsOn } = useStateContext()
-  return (
-    <div className="flex justify-center items-center flex-col">
-      <p className="font-bold my-1">Root</p>
-      <p onClick={() => navigate('/component-a')}>Go ComponentA</p>
-      on? off?:{isOn ? 'on' : 'off'}
-      <button
-        type="button"
-        className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-        onClick={() => setIsOn((isOn) => !isOn)}
-      >
-        toggle
-      </button>
-    </div>
-  )
-}
-
-export default Root
-```
-
-#### ComponentA.js(CSS 未適用)
-
-`Root`へ遷移、toggle の実装
-
-```
-import { useNavigate } from 'react-router-dom'
-import { useStateContext } from '../context/StateProvider'
-
-const ComponentA = () => {
-  const navigate = useNavigate()
-  const { isOn, setIsOn } = useStateContext()
-
-  return (
-    <div className="">
-      <p className="">ComponentA</p>
-      <p onClick={() => navigate('/')}>Go Root</p>
-      on? off?:{isOn ? 'on' : 'off'}
-      <button
-        type="button"
-        className=""
-        onClick={() => setIsOn((isOn) => !isOn)}
-      >
-        toggle
-      </button>
-    </div>
-  )
-}
-
-export default ComponentA
-```
-
-#### ComponentA.js
-
-CSS を適用する。
-
-```
-import { useNavigate } from 'react-router-dom'
-import { useStateContext } from '../context/StateProvider'
-
-const ComponentA = () => {
-  const navigate = useNavigate()
-  const { isOn, setIsOn } = useStateContext()
-
-  return (
-    <div className="flex justify-center items-center flex-col">
-      <p className="font-bold my-1">ComponentA</p>
-      <p onClick={() => navigate('/')}>Go Root</p>
-      on? off?:{isOn ? 'on' : 'off'}
-      <button
-        type="button"
-        className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-        onClick={() => setIsOn((isOn) => !isOn)}
-      >
-        toggle
-      </button>
-    </div>
-  )
-}
-
-export default ComponentA
-```
-
-#### Layout.js
-
-location を取得し"/"以外は"/"に帰るリンクを作成する
-
-```
-import { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { useStateContext } from '../context/StateProvider'
-import { Link, Outlet } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-import Modal from './Modal'
-
-const Layout = () => {
-  const { serviceName, isLogin } = useStateContext()
-  const navigate = useNavigate()
-  const [modalOn, setModalOn] = useState(false)
-  const location = useLocation()
-
-  useEffect(() => {
-    if (!isLogin) navigate('/login')
-  }, [isLogin, navigate])
-
-  return (
-    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
-      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
-        <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
-              </span>
-              <Link
-                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
-                to="/"
-              >
-                Root
-              </Link>
-              <Link
-                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
-                to="/component-a"
-              >
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon
-                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
-                aria-hidden="true"
-                onClick={() => {
-                  setModalOn(true)
-                }}
-              />
-            </div>
-            {modalOn ? <Modal setModalOn={setModalOn} /> : null}
-          </div>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-      {location.pathname === '/' ? null : <Link to="/">Top</Link>}
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-
-```
-
-#### routes への切り出し
-
-`./src`配下に`routes`ディレクトリを作成する。
-
-```
-mkdir -p ./src/routes
-```
-
-`index.js`の作成
-
-```
-import ComponentA from '../components/ComponentA'
-import Layout from '../components/Layout'
-import Login from '../components/Login'
-import Root from '../components/Root'
-
-export const routePath = [
-  { path: '/login', element: <Login /> },
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <Root />,
-      },
-      {
-        path: '/component-a',
-        element: <ComponentA />,
-      },
-    ],
-  },
-]
-```
-
-#### ./src/index.js
-
-`BrowserRouter`でラップする
-
-```
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import { BrowserRouter } from 'react-router-dom'
-
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
-```
-
-#### App.js
-
-```
-import { StateProvider } from './context/StateProvider'
-import { useRoutes } from 'react-router-dom'
-import { routePath } from './routes'
-
-const App = () => {
-  const element = useRoutes(routePath)
-  return <StateProvider>{element}</StateProvider>
-}
-
-export default App
-```
-
-v6 はここまでで終了。
-
-### v5
-
-v5 は以降を進める
-
-### Layout.js（レイアウトの実装１）
-
-一旦 JSX 内のレイアウトを作成する。利用する`Link`コンポーネント、`LogoutIcon`を import する。
-
-```
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-
-const Layout = ({ children }) => {
-  const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
-
-  return (
-    <div className="">
-      <header className="">
-        <nav className="">
-          <div className="">
-            <div className="">
-              <span className="">
-                {serviceName}!!
-              </span>
-              <Link className="">
-                Root
-              </Link>
-              <Link className="">
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon className="" />
-            </div>
-          </div>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer className="">
-        <div className="">
-          <p className="">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-
-```
-
-### Layout.js（レイアウトの実装１）
-
-CSS(tailwind)を適用する
-
-```
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-
-const Layout = ({ children }) => {
-  const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
-
-  return (
-    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
-      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
-        <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
-              </span>
-              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
-                Root
-              </Link>
-              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded" />
-            </div>
-          </div>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-
-```
-
 ### Modal.js(ログアウトモーダルの実装)
 
-`components/Modal.js`として作成
+`./src/components/Modal.js`を作成
 
 [tailwindui:Modals](https://tailwindui.com/components/application-ui/overlays/modals)を参考に実装
 
@@ -1465,264 +858,21 @@ export default Modal
 `Modal`コンポーネントを import し、モーダルの表示判定の`modalOn`ステートを作成、`LogoutIcon`をクリックした際にモーダルを表示するよう`onClick`イベントを記載
 
 ```
-import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [modalOn, setModalOn] = useState(false)
 
   useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
-
-  return (
-    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
-      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
-        <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
-              </span>
-              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
-                Root
-              </Link>
-              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon
-                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
-                aria-hidden="true"
-                onClick={() => {
-                  setModalOn(true)
-                }}
-              />
-              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
-            </div>
-          </div>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-
-```
-
-## Step3
-
-ゴール：`Layout`に`Root`、`ComponentA`を組み込み遷移できるようにする
-
-### Root.js
-
-`App`に`Layout`配下で組み込むコンポーネント`Root`を`src/components/Root.js`で一旦`hello`を表示するよう作成する
-
-```
-import React from 'react'
-
-const Root = () => {
-  return <div>Root</div>
-}
-
-export default Root
-```
-
-### App.js
-
-`Root`を組み込む
-
-```
-import React from 'react'
-import { StateProvider } from './context/StateProvider'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Layout from './components/Layout'
-import Login from './components/Login'
-import Root from './components/Root'
-
-const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <StateProvider>
-          <Switch>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Layout>
-                <Route exact path="/">
-                  <Root />
-                </Route>
-            </Layout>
-          </Switch>
-        </StateProvider>
-      </BrowserRouter>
-    </div>
-  )
-}
-
-export default App
-
-```
-
-### Layout.js
-
-`Root`の`Link`に設定する(`to='/'`の追記のみ)
-
-```
-import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-import Modal from './Modal'
-
-const Layout = ({ children }) => {
-  const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  const [modalOn, setModalOn] = useState(false)
-
-  useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
-
-  return (
-    <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
-      <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
-        <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
-              </span>
-              <Link
-                className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
-                to="/"
-              >
-                Root
-              </Link>
-              <Link className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded">
-                ComponentA
-              </Link>
-            </div>
-            <div className="">
-              <LogoutIcon
-                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
-                aria-hidden="true"
-                onClick={() => {
-                  setModalOn(true)
-                }}
-              />
-              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
-            </div>
-          </div>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-export default Layout
-
-```
-
-### ComponentA.js
-
-`src/components/ComponentA.js`を作成し一旦`ComponentA`を表示する
-
-```
-import React from 'react'
-
-const ComponentA = () => {
-  return <div>ComponentA</div>
-}
-
-export default ComponentA
-
-```
-
-### App.js
-
-`ComponentA`を組み込む
-
-```
-import React from 'react'
-import { StateProvider } from './context/StateProvider'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Layout from './components/Layout'
-import Login from './components/Login'
-import Root from './components/Root'
-import ComponentA from './components/ComponentA'
-
-const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <StateProvider>
-          <Switch>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Layout>
-              <Route exact path="/">
-                <Root />
-              </Route>
-              <Route exact path="/component-a">
-                <ComponentA />
-              </Route>
-            </Layout>
-          </Switch>
-        </StateProvider>
-      </BrowserRouter>
-    </div>
-  )
-}
-
-export default App
-
-```
-
-### Layout.js
-
-`ComponentA`の`Link`に設定し(`to='/component-a'`を追記)、`Root`以外の Location の場合 Top に戻る Link を設定(`useLocation`を利用)
-
-```
-import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router'
-import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
-import { LogoutIcon } from '@heroicons/react/outline'
-import Modal from './Modal'
-
-const Layout = ({ children }) => {
-  const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  const location = useLocation()
-  const [modalOn, setModalOn] = useState(false)
-
-  useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
+    if (!isLogin) navigate('/login')
+  }, [isLogin, navigate])
 
   return (
     <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
@@ -1754,13 +904,14 @@ const Layout = ({ children }) => {
                   setModalOn(true)
                 }}
               />
-              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
             </div>
+            {modalOn ? <Modal setModalOn={setModalOn} /> : null}
           </div>
         </nav>
       </header>
-      <main>{children}</main>
-      {location.pathname === '/' ? null : <Link to="/">Top</Link>}
+      <main>
+        <Outlet />
+      </main>
       <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
         <div className="flex justify-center items-center">
           <p className="pt-3">{serviceName}@2021</p>
@@ -1771,17 +922,13 @@ const Layout = ({ children }) => {
 }
 
 export default Layout
-
-
 ```
 
-## Step4
-
-ゴール：
+ゴール：Root,ComponentA の中を実装する
 
 ### StateProvider.js
 
-`isOn, setIsOn`の定義
+`isOn,SetIsOn`の定義
 
 ```
 import { createContext, useContext, useState } from 'react'
@@ -1803,26 +950,25 @@ export const StateProvider = ({ children }) => {
 }
 
 export const useStateContext = () => useContext(StateContext)
-
 ```
 
-### Root.js
+### Root.js(CSS 未適用)
 
 `ComponentA`へ遷移、toggle の実装
 
 ```
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
 
 const Root = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isOn, setIsOn } = useStateContext()
 
   return (
     <div className="">
       <p className="">Root</p>
-      <p onClick={() => history.push('/component-a')}>Go ComponentA</p>
+      <p onClick={() => navigate('/component-a')}>Go ComponentA</p>
       on? off?:{isOn ? 'on' : 'off'}
       <button
         type="button"
@@ -1839,23 +985,21 @@ export default Root
 
 ```
 
-### Root.js
+### Root.js(CSS 適用)
 
-CSS の適用
+CSS を適用する
 
 ```
-import React from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
 
 const Root = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isOn, setIsOn } = useStateContext()
-
   return (
     <div className="flex justify-center items-center flex-col">
       <p className="font-bold my-1">Root</p>
-      <p onClick={() => history.push('/component-a')}>Go ComponentA</p>
+      <p onClick={() => navigate('/component-a')}>Go ComponentA</p>
       on? off?:{isOn ? 'on' : 'off'}
       <button
         type="button"
@@ -1871,23 +1015,22 @@ const Root = () => {
 export default Root
 ```
 
-### ComponentA.js
+#### ComponentA.js(CSS 未適用)
 
 `Root`へ遷移、toggle の実装
 
 ```
-import React from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
 
 const ComponentA = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isOn, setIsOn } = useStateContext()
 
   return (
     <div className="">
       <p className="">ComponentA</p>
-      <p onClick={() => history.push('/')}>Go Root</p>
+      <p onClick={() => navigate('/')}>Go Root</p>
       on? off?:{isOn ? 'on' : 'off'}
       <button
         type="button"
@@ -1901,26 +1044,24 @@ const ComponentA = () => {
 }
 
 export default ComponentA
-
 ```
 
-### ComponentA.js
+#### ComponentA.js
 
-CSS の適用
+CSS を適用する。
 
 ```
-import React from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
 
 const ComponentA = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isOn, setIsOn } = useStateContext()
 
   return (
     <div className="flex justify-center items-center flex-col">
       <p className="font-bold my-1">ComponentA</p>
-      <p onClick={() => history.push('/')}>Go Root</p>
+      <p onClick={() => navigate('/')}>Go Root</p>
       on? off?:{isOn ? 'on' : 'off'}
       <button
         type="button"
@@ -1938,23 +1079,25 @@ export default ComponentA
 
 ### Layout.js
 
+location を取得し"/"以外は"/"に帰るリンクを作成する
+
 ```
-import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
-  const history = useHistory()
-  const location = useLocation()
+  const navigate = useNavigate()
   const [modalOn, setModalOn] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
-    if (!isLogin) history.push('/login')
-  })
+    if (!isLogin) navigate('/login')
+  }, [isLogin, navigate])
 
   return (
     <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
@@ -1986,12 +1129,14 @@ const Layout = ({ children }) => {
                   setModalOn(true)
                 }}
               />
-              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
             </div>
+            {modalOn ? <Modal setModalOn={setModalOn} /> : null}
           </div>
         </nav>
       </header>
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
       {location.pathname === '/' ? null : <Link to="/">Top</Link>}
       <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
         <div className="flex justify-center items-center">
@@ -2006,31 +1151,52 @@ export default Layout
 
 ```
 
----
+#### routes への切り出し
 
-## Available Scripts
+`./src`配下に`routes`ディレクトリを作成する。
 
-In the project directory, you can run:
+```
+mkdir -p ./src/routes
+```
 
-### `yarn start`
+`index.js`の作成
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+import ComponentA from '../components/ComponentA'
+import Layout from '../components/Layout'
+import Login from '../components/Login'
+import Root from '../components/Root'
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+export const routePath = [
+  { path: '/login', element: <Login /> },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Root />,
+      },
+      {
+        path: '/component-a',
+        element: <ComponentA />,
+      },
+    ],
+  },
+]
+```
 
-### `yarn test`
+### App.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+import { StateProvider } from './context/StateProvider'
+import { useRoutes } from 'react-router-dom'
+import { routePath } from './routes'
 
-### `yarn build`
+const App = () => {
+  const element = useRoutes(routePath)
+  return <StateProvider>{element}</StateProvider>
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+export default App
+```
