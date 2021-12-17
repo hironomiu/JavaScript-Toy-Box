@@ -661,7 +661,7 @@ Already logged in as xxxxx@gmail.com
 
 ```
 
-矢印などで上下させ「Hosting: Configure」をを選択しスペースを押下しエンターを押下
+矢印などで上下させ「Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys」をを選択しスペースを押下しエンターを押下
 
 ```
 
@@ -670,16 +670,15 @@ $ npx firebase init
 ######## #### ######## ######## ######## ### ###### ######## ## ## ## ## ## ## ## ## ## ## ## ###### ## ######## ###### ######## ######### ###### ###### ## ## ## ## ## ## ## ## ## ## ## ## #### ## ## ######## ######## ## ## ###### ########
 You're about to initialize a Firebase project in this directory:
 /Users/Desktop/test
-? Which Firebase CLI features do you want to set up for this folder? Press Space to select featur
-es, then Enter to confirm your choices. (Press <space> to select, <a> to toggle all, <i> to inver
-t selection)
-◯ Database: Configure Firebase Realtime Database and deploy rules
-◯ Firestore: Deploy rules and create indexes for Firestore
-◯ Functions: Configure and deploy Cloud Functions
-❯◯ Hosting: Configure and deploy Firebase Hosting sites
-◯ Storage: Deploy Cloud Storage security rules
-◯ Emulators: Set up local emulators for Firebase features
-◯ Remote Config: Get, deploy, and rollback configurations for Remote Config
+? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm
+your choices.
+ ◯ Realtime Database: Configure a security rules file for Realtime Database and (optionally) provision default instance
+ ◯ Firestore: Configure security rules and indexes files for Firestore
+ ◯ Functions: Configure a Cloud Functions directory and its files
+❯◉ Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+ ◯ Hosting: Set up GitHub Action deploys
+ ◯ Storage: Configure a security rules file for Cloud Storage
+ ◯ Emulators: Set up local emulators for Firebase products
 ```
 
 「Use an existing project」を選択しエンターを押下
