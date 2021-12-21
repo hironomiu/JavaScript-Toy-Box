@@ -150,10 +150,9 @@ mkdir -p ./src/components
 `src/components`配下に`Layout.js`を作成し`context`で定義した`serviceName`を表示する以下を記述する
 
 ```
-import React from 'react'
 import { useStateContext } from '../context/StateProvider'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { serviceName } = useStateContext()
 
   return <div>{serviceName}</div>
@@ -167,8 +166,7 @@ export default Layout
 `App.js`に`context`,`Layout`を組み込み画面に`Super Web Site`を表示する
 
 ```
-import React from 'react'
-import { StateProvider } from './context/StateProvider'
+mport { StateProvider } from './context/StateProvider'
 import Layout from './components/Layout'
 
 const App = () => {
@@ -191,7 +189,6 @@ export default App
 `src/components`配下に`Login.js`を作成
 
 ```
-import React from 'react'
 import { useStateContext } from '../context/StateProvider'
 
 const Login = () => {
@@ -267,7 +264,6 @@ export default App
 `Login.js`に CSS(`tailwind`)を当てていく
 
 ```
-import React from 'react'
 import { useStateContext } from '../context/StateProvider'
 
 const Login = () => {
@@ -353,7 +349,7 @@ export const useStateContext = () => useContext(StateContext)
 
 ### index.js
 
-`BrowserRouter`で`<App/>`をラップする
+`BrowserRouter`で`<App/>`をラップし、`App.js`から`StateProvide`を移動する
 
 ```
 import React from 'react'
@@ -599,7 +595,6 @@ export default ComponentA
 `Layout`に children として`Root`,`ComponentA`を設定する
 
 ```
-import { StateProvider } from './context/StateProvider'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Login from './components/Login'
@@ -609,15 +604,13 @@ import ComponentA from './components/ComponentA'
 const App = () => {
   return (
     <div>
-      <StateProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Root />} />
-            <Route path="/component-a" element={<ComponentA />}></Route>
-          </Route>
-        </Routes>
-      </StateProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Root />} />
+          <Route path="/component-a" element={<ComponentA />}></Route>
+        </Route>
+      </Routes>
     </div>
   )
 }
