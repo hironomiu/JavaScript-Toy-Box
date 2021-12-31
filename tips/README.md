@@ -9,3 +9,5 @@
 [関数合成](./function-synthesis)
 
 [フィボナッチ数](./fibonacci-number)
+
+[ビット反転演算子](./bit-inversion-operator)

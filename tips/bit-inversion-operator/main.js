@@ -1,0 +1,5 @@
+~-1 ? console.log('true ~-1 is ' + ~-1) : console.log('false ~-1 is ' + ~-1)
+~-2 ? console.log('true ~-2 is ' + ~-2) : console.log('false ~-2 is ' + ~-2)
+~0 ? console.log('true ~0 is ' + ~0) : console.log('false ~0 is ' + ~0)
+~1 ? console.log('true ~1 is ' + ~1) : console.log('false ~1 is ' + ~1)
+~2 ? console.log('true ~2 is ' + ~1) : console.log('false ~2 is ' + ~2)
