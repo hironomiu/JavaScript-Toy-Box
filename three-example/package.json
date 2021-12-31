@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --config webpack.dev.js"
+  },
+  "dependencies": {
+    "three": "^0.136.0",
+    "three-trackballcontrols": "^0.9.0"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2",
+    "webpack-merge": "^5.8.0"
+  }
+}
