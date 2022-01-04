@@ -13,3 +13,5 @@
 [ビット反転演算子](./bit-inversion-operator)
 
 [文字列内の存在チェック](./contains-strings)
+
+[型変換(キャスト)](./type-conversion)
