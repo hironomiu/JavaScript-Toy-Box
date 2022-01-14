@@ -644,7 +644,7 @@ $ yarn add --dev firebase-tools
 ```
 
 $ npx firebase -V
-9.21.0
+10.1.0
 
 ```
 
