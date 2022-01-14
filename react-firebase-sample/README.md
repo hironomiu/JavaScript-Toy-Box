@@ -446,7 +446,7 @@ export default Message
 
 ```
 import Message from './Message'
-import useHooks from '../hooks/useApp'
+import useApp from '../hooks/useApp'
 
 const App = () => {
   const { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data } =
