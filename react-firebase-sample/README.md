@@ -103,10 +103,10 @@
 ```
 $ mkdir firebase-react-sample
 $ cd firebase-react-sample
-$ npx create-react-app .
+$ yarn create react-app .
 ```
 
-注意：`npx create-react-app .`がエラーになる場合、`yarn create react-app .`で React APP を作成します
+注意：`yarn`が使えない場合は`npx create-react-app .`で React APP を作成。作成後`README.md`のガイダンスが`npm`の場合は以降`yarn`を全て`npm`に読み替えて行うこと
 
 #### .env.local
 
