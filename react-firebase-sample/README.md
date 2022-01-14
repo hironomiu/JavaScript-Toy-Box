@@ -446,11 +446,11 @@ export default Message
 
 ```
 import Message from './Message'
-import useHooks from '../hooks/appHooks'
+import useHooks from '../hooks/useApp'
 
 const App = () => {
   const { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data } =
-    useHooks()
+    useApp()
 
   return (
     <>
@@ -483,13 +483,13 @@ const Message = memo(({ message }) => {
 export default Message
 ```
 
-`.src/hooks/appHooks.js`
+`.src/hooks/useApp.js`
 
 ```
 import { useState, useEffect, useCallback } from 'react'
 import { messagesRef, pushMessage } from '../firebase'
 
-const useHooks = () => {
+const useApp = () => {
   const [data, setData] = useState({ name: 'default', text: 'text' })
   const [messages, setMessages] = useState([])
 
@@ -534,7 +534,7 @@ const useHooks = () => {
   return { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data }
 }
 
-export default useHooks
+export default useApp
 ```
 
 ### 確認
