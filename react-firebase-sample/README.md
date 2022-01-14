@@ -440,7 +440,7 @@ const Message = memo(({ message }) => {
 export default Message
 ```
 
-更に別な書き方(Custom Hooks)
+更に別な書き方(Custom Hooks + memo + useCallback)
 
 `./src/components/App.js`
 
