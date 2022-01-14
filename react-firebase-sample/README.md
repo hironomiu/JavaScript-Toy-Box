@@ -445,10 +445,11 @@ export default Message
 `./src/components/App.js`
 
 ```
+import { memo } from 'react'
 import Message from './Message'
 import useApp from '../hooks/useApp'
 
-const App = () => {
+const App = memo(() => {
   const { setNameFunc, setTextFunc, pushMessageToFirebase, messages, data } =
     useApp()
 
@@ -462,9 +463,10 @@ const App = () => {
       <button onClick={() => pushMessageToFirebase()}>push</button>
     </>
   )
-}
+})
 
 export default App
+
 ```
 
 `./src/components/Message.js`(変更なし)
