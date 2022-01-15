@@ -856,9 +856,8 @@ export default Modal
 
 ```
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link, Outlet } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
-import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
