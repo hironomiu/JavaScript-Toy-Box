@@ -589,8 +589,6 @@ export default Root
 `./src/components`配下に`ComponentA.js`を仮で実装する
 
 ```
-import React from 'react'
-
 const ComponentA = () => {
   return <div>ComponentA</div>
 }
