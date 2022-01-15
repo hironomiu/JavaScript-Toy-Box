@@ -12,7 +12,7 @@ yarn を利用
 
 ## SetUp
 
-### React tailwind craco
+### React
 
 任意のディレクトリから今回の作業用ディレクトリの作成(ディレクトリ名は何でも良い)
 
