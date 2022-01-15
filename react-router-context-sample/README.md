@@ -920,6 +920,8 @@ const Layout = () => {
 export default Layout
 ```
 
+## Step3
+
 ゴール：Root,ComponentA の中を実装する
 
 ### StateProvider.js
