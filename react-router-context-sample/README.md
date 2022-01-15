@@ -21,11 +21,16 @@ mkdir react-router-context-sample
 cd react-router-context-sample
 ```
 
-`create-react-app`と必要なパッケージのインストール(`npx create-react-app .`がエラーになる場合は`yarn create react-app .`で行う)
+`create-react-app`と必要なパッケージのインストール(`yarn create react-app .`がエラーもしくは`yarn`が無い場合は`npx create-react-app .`で行い以降`yarn`の箇所を`npm`で読み替える)
+
+```
+yarn add react-router-dom
+```
+
+or
 
 ```
 npx create-react-app .
-yarn add react-router-dom
 ```
 
 ### tailwind install & init
