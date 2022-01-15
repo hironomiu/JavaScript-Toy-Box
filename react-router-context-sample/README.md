@@ -677,9 +677,8 @@ export default Layout
 
 ```
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link, Outlet } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
-import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 const Layout = () => {
   const { serviceName, isLogin } = useStateContext()
