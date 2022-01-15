@@ -1,27 +1,28 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
+import { useHistory, useLocation } from 'react-router'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
-const Layout = () => {
-  const { serviceName, isLogin } = useStateContext()
-  const navigate = useNavigate()
-  const [modalOn, setModalOn] = useState(false)
+const Layout = ({ children }) => {
+  const { isLogin, serviceName } = useStateContext()
+  const history = useHistory()
   const location = useLocation()
+  const [modalOn, setModalOn] = useState(false)
 
   useEffect(() => {
-    if (!isLogin) navigate('/login')
-  }, [isLogin, navigate])
+    if (!isLogin) history.push('/login')
+  })
 
   return (
     <div className="flex items-center flex-col min-h-screen text-gray-600 font-mono">
       <header className="flex items-center pl-8 h-14 bg-gray-600 w-screen">
         <nav className="bg-gray-600 w-screen">
-          <div className="flex justify-between">
-            <div className="">
+          <div className="flex items-center pl-8 h-14 ">
+            <div className="flex space-x-4">
               <span className="font-semibold text-xl tracking-tight text-white">
-                {serviceName}!!
+                Super Web Site!!
               </span>
               <Link
                 className="text-sm text-gray-200 hover:bg-gray-700 px-3 py-2 rounded"
@@ -35,27 +36,24 @@ const Layout = () => {
               >
                 ComponentA
               </Link>
-            </div>
-            <div className="">
               <LogoutIcon
-                className="h-8 w-10 text-gray-200 hover:bg-gray-700 px-1 mr-5 rounded"
+                className="h-10 w-10 text-gray-300 hover:bg-gray-700 px-1 rounded"
                 aria-hidden="true"
                 onClick={() => {
                   setModalOn(true)
                 }}
               />
+              {modalOn ? <Modal setModalOn={setModalOn} /> : null}
             </div>
-            {modalOn ? <Modal setModalOn={setModalOn} /> : null}
           </div>
         </nav>
       </header>
-      <main>
-        <Outlet />
-      </main>
+      <main>{children}</main>
       {location.pathname === '/' ? null : <Link to="/">Top</Link>}
-      <footer className="bg-gray-400 w-screen absolute bottom-0 h-14">
-        <div className="flex justify-center items-center">
-          <p className="pt-3">{serviceName}@2021</p>
+
+      <footer className="flex justify-center bg-gray-400 w-screen absolute bottom-0 h-14">
+        <div className="flex items-center">
+          <p className="p-2">{serviceName}</p>
         </div>
       </footer>
     </div>
