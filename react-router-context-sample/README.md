@@ -1196,3 +1196,7 @@ const App = () => {
 
 export default App
 ```
+
+### 落穂拾い
+
+今回作成した各 component は`return`から`div`で括っていますが[フラグメント (fragment)](https://ja.reactjs.org/docs/fragments.html)でまとめることが可能です。
