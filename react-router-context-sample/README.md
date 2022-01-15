@@ -177,7 +177,7 @@ export default Layout
 `App.js`に`context`,`Layout`を組み込み画面に`Super Web Site`を表示する
 
 ```
-mport { StateProvider } from './context/StateProvider'
+import { StateProvider } from './context/StateProvider'
 import Layout from './components/Layout'
 
 const App = () => {
