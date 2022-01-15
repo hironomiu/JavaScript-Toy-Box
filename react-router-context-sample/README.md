@@ -223,7 +223,7 @@ const Login = () => {
         </div>
         <div className="">
           <label htmlFor="password" className="">
-            username
+            password
           </label>
           <input
             type="password"
@@ -306,7 +306,7 @@ const Login = () => {
             htmlFor="password"
             className="block text-grey-darker text-sm pt-2 font-bold mb-2"
           >
-            username
+            password
           </label>
           <input
             type="password"
@@ -450,7 +450,7 @@ const Login = () => {
             htmlFor="password"
             className="block text-grey-darker text-sm pt-2 font-bold mb-2"
           >
-            username
+            password
           </label>
           <input
             type="password"
@@ -545,7 +545,7 @@ const Login = () => {
             htmlFor="password"
             className="block text-grey-darker text-sm pt-2 font-bold mb-2"
           >
-            username
+            password
           </label>
           <input
             type="password"

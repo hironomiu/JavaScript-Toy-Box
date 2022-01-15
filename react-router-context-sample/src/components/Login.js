@@ -40,7 +40,7 @@ const Login = () => {
             htmlFor="password"
             className="block text-grey-darker text-sm pt-2 font-bold mb-2"
           >
-            username
+            password
           </label>
           <input
             type="password"
