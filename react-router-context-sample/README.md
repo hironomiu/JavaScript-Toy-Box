@@ -577,8 +577,6 @@ export default Login
 `./src/components`配下に`Root.js`を仮で実装する
 
 ```
-import React from 'react'
-
 const Root = () => {
   return <div>Root</div>
 }
