@@ -955,7 +955,6 @@ export const useStateContext = () => useContext(StateContext)
 `ComponentA`へ遷移、toggle の実装
 
 ```
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
 
