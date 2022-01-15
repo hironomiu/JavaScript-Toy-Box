@@ -1080,9 +1080,8 @@ location を取得し"/"以外は"/"に帰るリンクを作成する
 
 ```
 import { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom'
 import { useStateContext } from '../context/StateProvider'
-import { Link, Outlet } from 'react-router-dom'
 import { LogoutIcon } from '@heroicons/react/outline'
 import Modal from './Modal'
 
