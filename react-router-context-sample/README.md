@@ -559,9 +559,7 @@ const Login = () => {
           <button
             type="button"
             className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              login()
-            }}
+            onClick={() => login()}
           >
             Login
           </button>
