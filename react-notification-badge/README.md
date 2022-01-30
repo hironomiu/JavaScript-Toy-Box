@@ -2,6 +2,8 @@
 
 通知バッジ（ベル、メール）の実装例
 
+`Main`と`Header`での通知数の共有は`Context API`を利用
+
 ![demo](./demo.gif)
 
 ## SetUp
