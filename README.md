@@ -34,6 +34,10 @@ BrowserRouter,Context を使いグローバルでデータの保持、ログイ�
 
 通知バッジ（ベル、メール）の実装例
 
+## [react-context-reducer-counter](./react-context-reducer-counter)
+
+React Context + Reducer でのカウンターアプリ
+
 ## [vanilla-counter](./vanilla-counter)
 
 vanilla な JavaScript で couter アプリを class,function での実装例
