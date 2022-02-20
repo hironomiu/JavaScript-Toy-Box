@@ -19,3 +19,7 @@
 [ドット記法、ブラケット(角括弧)記法](./dot-bracket-notation)
 
 [連続整数の和](./sumOfConsecutiveIntegers)
+
+[reduce](./reduce)
+
+[フィルターもどき](./filter-imitation/)
