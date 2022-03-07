@@ -23,3 +23,5 @@
 [reduce](./reduce)
 
 [フィルターもどき](./filter-imitation/)
+
+[カリー化](./currying/)
