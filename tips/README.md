@@ -25,3 +25,5 @@
 [フィルターもどき](./filter-imitation/)
 
 [カリー化](./currying/)
+
+[残余引数(Rest parameters)](./rest-parameters/)
