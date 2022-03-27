@@ -29,3 +29,5 @@
 [残余引数(Rest parameters)](./rest-parameters/)
 
 [Null 合体演算子(Nullish coalescing operator (??))](./nullish-coalescing-operator/)
+
+[正規表現(regex)](./regex/)
