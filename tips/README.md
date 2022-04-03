@@ -31,3 +31,5 @@
 [Null 合体演算子(Nullish coalescing operator (??))](./nullish-coalescing-operator/)
 
 [正規表現(regex)](./regex/)
+
+[分割代入](destructuring-assignment)
