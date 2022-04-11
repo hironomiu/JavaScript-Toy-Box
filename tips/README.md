@@ -22,7 +22,9 @@
 
 [連続整数の和](./sumOfConsecutiveIntegers)
 
-[reduce](./reduce)
+[Array.prototype.reduce()](./reduce)
+
+[reduce もどき](./reduce-imitation)
 
 [フィルターもどき](./filter-imitation/)
 
