@@ -34,4 +34,6 @@
 
 [正規表現(regex)](./regex/)
 
-[分割代入](destructuring-assignment)
+[分割代入](./destructuring-assignment/)
+
+[bind(this について)](./bind/)
