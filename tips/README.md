@@ -37,3 +37,5 @@
 [分割代入](./destructuring-assignment/)
 
 [bind(this について)](./bind/)
+
+[テーマ関係なく思いついたもの](./junk/)
