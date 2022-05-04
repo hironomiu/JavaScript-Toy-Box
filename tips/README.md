@@ -39,3 +39,5 @@
 [bind(this について)](./bind/)
 
 [テーマ関係なく思いついたもの](./junk/)
+
+[シャローコピー(shallow copy) ディープコピー(deep copy)](./shallow-copy-deep-copy/)
