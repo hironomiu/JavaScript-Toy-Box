@@ -9,7 +9,7 @@ const caesarCipher = (str, interval) => {
     .map((char) => {
       const codePoint = char.codePointAt(0)
       if (codePoint >= codePointA && codePoint <= codePointZ) {
-        return codePoint + interval - codePointZ > 0
+        return codePoint + interval > codePointZ
           ? codePointA + codePoint + interval - codePointZ - 1
           : codePoint + interval
       }
