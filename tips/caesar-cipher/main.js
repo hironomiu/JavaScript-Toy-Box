@@ -22,3 +22,4 @@ const caesarCipher = (str, interval) => {
 }
 
 console.log('Output:', caesarCipher('HELLO WORLD ZZ', 3))
+console.log('Output:', caesarCipher(`ALOHA!! HOGE'S ZZ`, 5))
