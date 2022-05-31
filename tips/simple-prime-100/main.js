@@ -23,7 +23,8 @@ const getPrimes = (array) => {
 }
 
 const main = () => {
-  const primes = [...new Array(100).keys()].map((_) => 0)
+  // const primes = [...new Array(100).keys()].map((_) => 0)
+  const primes = Array(100).fill(0)
   getPrimes(primes)
   console.log(primes)
 }
