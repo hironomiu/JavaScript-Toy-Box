@@ -43,3 +43,5 @@
 [シャローコピー(shallow copy) ディープコピー(deep copy)](./shallow-copy-deep-copy/)
 
 [Caesar cipher(シーザー暗号)](./caesar-cipher/)
+
+[素朴な素数 100](./simple-prime-100/)
