@@ -62,6 +62,10 @@ node での http サーバ
 
 [three.js](https://threejs.org/) での実装例
 
+## [puppeteer-sample](./puppeteer-sample)
+
+## [playwright-sample](./playwright-sample)
+
 ## [tips](./tips)
 
 JavaScript の Tips 集

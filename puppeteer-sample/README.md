@@ -1,4 +1,4 @@
-# puppeteer
+# puppeteer-sample
 
 [公式：puppeteer](https://github.com/puppeteer/puppeteer)
 
