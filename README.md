@@ -66,6 +66,8 @@ node での http サーバ
 
 ## [playwright-sample](./playwright-sample)
 
+## [openweathermap-sample](./openweathermap-sample)
+
 ## [tips](./tips)
 
 JavaScript の Tips 集
